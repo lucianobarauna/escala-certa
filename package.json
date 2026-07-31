@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@11.18.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "oxlint",
+    "lint": "oxlint --deny-warnings",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "prepare": "husky"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
@@ -39,6 +39,8 @@
     "@vitejs/plugin-react": "^6.0.4",
     "@vitest/browser-playwright": "^4.1.10",
     "babel-plugin-react-compiler": "^1.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.2.0",
     "oxfmt": "^0.61.0",
     "oxlint": "^1.75.0",
     "playwright": "^1.62.0",
@@ -46,5 +48,15 @@
     "vite": "^8.2.0",
     "vitest": "^4.1.10",
     "vitest-browser-react": "^2.2.0"
-  }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "oxlint --fix",
+      "oxfmt"
+    ],
+    "*.{json,css,md}": [
+      "oxfmt"
+    ]
+  },
+  "packageManager": "pnpm@11.18.0"
 }
