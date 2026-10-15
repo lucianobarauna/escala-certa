@@ -1,10 +1,85 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["typescript", "unicorn", "oxc"],
+  "plugins": ["typescript", "unicorn", "oxc", "import"],
+  "ignorePatterns": [".claude/**"],
   "categories": {
     "correctness": "error"
   },
-  "rules": {},
+  "rules": {
+    "max-lines": [
+      "error",
+      {
+        "max": 100
+      }
+    ],
+    "max-lines-per-function": [
+      "error",
+      {
+        "max": 30
+      }
+    ],
+    "max-depth": [
+      "error",
+      {
+        "max": 3
+      }
+    ],
+    "max-params": [
+      "error",
+      {
+        "max": 3
+      }
+    ],
+    "no-else-return": [
+      "error",
+      {
+        "allowElseIf": false
+      }
+    ],
+    "no-magic-numbers": [
+      "error",
+      {
+        "ignore": [-1, 0, 1],
+        "ignoreArrayIndexes": true,
+        "ignoreDefaultValues": true,
+        "ignoreEnums": true,
+        "ignoreNumericLiteralTypes": true,
+        "ignoreTypeIndexes": true
+      }
+    ],
+    "import/no-relative-parent-imports": "error",
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "react",
+            "importNames": ["useMemo", "useCallback", "memo"],
+            "message": "O React Compiler já memoiza automaticamente. Use apenas se um profiling mostrar necessidade real."
+          }
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["src/components/ui/**"],
+      "rules": {
+        "max-lines": "off",
+        "max-lines-per-function": "off",
+        "max-params": "off",
+        "no-magic-numbers": "off",
+        "no-restricted-imports": "off"
+      }
+    },
+    {
+      "files": ["**/*.spec.ts", "**/*.spec.tsx"],
+      "rules": {
+        "max-lines-per-function": "off",
+        "no-magic-numbers": "off"
+      }
+    }
+  ],
   "env": {
     "builtin": true
   }
