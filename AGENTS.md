@@ -1,38 +1,52 @@
 # AGENTS.md
 
-This file provides guidance to AI coding agents (Claude Code, Codex, Cursor, etc.) when working with code in this repository.
+Este arquivo orienta agentes de IA para código (Claude Code, Codex, Cursor etc.) ao trabalhar com o código deste repositório.
 
-## Project status
+## Status do projeto
 
-Early-stage scaffold (React 19 + TypeScript + Vite + Tailwind CSS v4 + shadcn/ui). `src/App.tsx` no longer has the default Vite template — it's now a minimal placeholder wiring up `HelloWorld` and a shadcn `Button`, still throwaway rather than established architecture.
+Scaffold em estágio inicial (React 19 + TypeScript + Vite + Tailwind CSS v4 + shadcn/ui). O `src/App.tsx` não tem mais o template padrão do Vite — agora é um placeholder mínimo que conecta o `HelloWorld` e um `Button` do shadcn, ainda descartável e não uma arquitetura estabelecida.
 
-## Commands
+## Regras
 
-- `pnpm dev` — start the Vite dev server
-- `pnpm build` — type-check (`tsc -b`) then build for production
-- `pnpm lint` — run Oxlint
-- `pnpm format` / `pnpm format:check` — format (or check formatting) with oxfmt, config in `.oxfmtrc.json` (also sorts imports and Tailwind classes)
-- `pnpm test` — run the test suite (Vitest, watch mode by default)
-- `pnpm preview` — preview the production build
+Este arquivo cobre arquitetura e ferramentas. As convenções de código (como escrever código aqui) ficam em `.agents/rules/code-standards.md`, importado abaixo — agentes que não resolvem imports com `@` devem ler esse arquivo diretamente.
 
-Package manager is **pnpm** (see `pnpm-lock.yaml`). Node version is pinned in `.nvmrc` (also consumed by the CI deploy workflow).
+@.agents/rules/code-standards.md
 
-### Running a single test
+O `.agents/rules/code-standards.md` e o `.oxlintrc.json` devem ficar sincronizados nos dois sentidos:
 
-Tests run in a real browser via Playwright (chromium), not jsdom. To run one file:
+- Quando o `code-standards.md` mudar, verifique se a regra nova ou alterada pode ser aplicada automaticamente pelo Oxlint e, se fizer sentido, atualize o `.oxlintrc.json`. Regras que o Oxlint não cobre ficam apenas no documento.
+- Quando o `.oxlintrc.json` mudar (regra adicionada, removida, com limite alterado ou com nova exceção em `overrides`/`ignorePatterns`) e isso não estiver refletido no `code-standards.md`, atualize o documento para descrever a regra em português, com exemplo, e ajuste a lista de regras automáticas na seção "Formatação e Lint".
+
+## Comandos
+
+- `pnpm dev` — inicia o servidor de desenvolvimento do Vite
+- `pnpm build` — faz a checagem de tipos (`tsc -b`) e depois o build de produção
+- `pnpm lint` — roda o Oxlint
+- `pnpm format` / `pnpm format:check` — formata (ou verifica a formatação) com oxfmt, configurado em `.oxfmtrc.json` (também ordena imports e classes do Tailwind)
+- `pnpm test` — roda a suíte de testes (Vitest, em modo watch por padrão)
+- `pnpm preview` — pré-visualiza o build de produção
+
+O gerenciador de pacotes é o **pnpm** (veja `pnpm-lock.yaml`). A versão do Node está fixada em `.nvmrc` (também usada pelo workflow de deploy na CI).
+
+### Rodando um único teste
+
+Os testes rodam em um navegador real via Playwright (chromium), não em jsdom. Para rodar um arquivo:
 
 ```
 pnpm vitest run src/components/HelloWorld/HelloWorld.spec.tsx
 ```
 
-## Architecture
+## Arquitetura
 
-- **Build tool**: Vite, with the React Compiler enabled via Babel (`@rolldown/plugin-babel` + `babel-plugin-react-compiler` in `vite.config.ts`). Don't hand-write `useMemo`/`useCallback` optimizations expecting them to be necessary — the compiler handles memoization automatically.
-- **Styling**: Tailwind CSS v4 via `@tailwindcss/vite` (no `tailwind.config.js` — v4 uses CSS-based config in `src/index.css`). Components lean on Tailwind utility classes, including arbitrary-value utilities (e.g. `bg-(--accent-bg)`) that reference CSS custom properties defined in `index.css`.
-- **UI components**: shadcn/ui is installed (`components.json`), configured with the `aria-nova` style (built on `react-aria-components`, not Radix), `mist` base color, and `lucide-react` for icons. Generated primitives live in `src/components/ui/` (e.g. `button.tsx`); the `cn()` class-merging helper (`clsx` + `tailwind-merge`) is in `src/lib/utils.ts`. Theme tokens (colors, radius, sidebar/chart variables) are defined as CSS custom properties in `src/index.css` under `:root` / `.dark` and exposed to Tailwind via `@theme inline`. Fonts are self-hosted via `@fontsource-variable/geist` and `@fontsource-variable/inter` (Inter is the active `--font-sans`).
-- **Path aliases**: `@/*` maps to `src/*` (`vite.config.ts` resolve alias, mirrored in `tsconfig.json`/`tsconfig.app.json` `paths`, and used by shadcn's `aliases` in `components.json`).
-- **Testing**: Vitest is configured for **browser mode** (`vitest.config.ts`), running specs in a real Chromium instance via `@vitest/browser-playwright`, using `vitest-browser-react`'s `render` and locator-based queries (`getByText`, `getByRole`, etc.) rather than jsdom + Testing Library. Spec files live next to the component they test (e.g. `src/components/HelloWorld/HelloWorld.spec.tsx`).
-- **Component convention**: one folder per component under `src/components/<Name>/`, containing `<Name>.tsx` and `<Name>.spec.tsx`. (shadcn-generated primitives in `src/components/ui/` are flat files, not folders.)
-- **Linting/formatting**: Oxlint (`.oxlintrc.json`) for linting, not ESLint. Type-aware linting is not currently enabled (would require `oxlint-tsgolint`). oxfmt (`.oxfmtrc.json`) handles formatting, import sorting, and Tailwind class sorting — not Prettier.
-- **TypeScript**: project-references setup (`tsconfig.json` → `tsconfig.app.json` for `src/`, `tsconfig.node.json` for Vite config). Strict unused-locals/params checks and `verbatimModuleSyntax` are on, so use type-only imports (`import type { X }`) where applicable.
-- **Deployment**: `.github/workflows/deploy.yml` builds and deploys `dist/` to GitHub Pages on every push to `main` (or manual dispatch). Vite's `base` in `vite.config.ts` is set to `/escala-certa/` to match the Pages subpath — keep them in sync if the repo is ever renamed.
+- **Ferramenta de build**: Vite, com o React Compiler habilitado via Babel (`@rolldown/plugin-babel` + `babel-plugin-react-compiler` em `vite.config.ts`). Ele cuida da memoização automaticamente.
+- **Estilização**: Tailwind CSS v4 via `@tailwindcss/vite` (sem `tailwind.config.js` — a v4 usa configuração baseada em CSS em `src/index.css`). Os componentes se apoiam em classes utilitárias do Tailwind, incluindo utilitários com valores arbitrários (ex.: `bg-(--accent-bg)`) que referenciam CSS custom properties definidas em `index.css`.
+- **Componentes de UI**: o shadcn/ui está instalado (`components.json`), configurado com o estilo `aria-nova` (construído sobre `react-aria-components`, não Radix), cor base `mist` e `lucide-react` para ícones. Os primitivos gerados ficam em `src/components/ui/` (ex.: `button.tsx`); o helper de merge de classes `cn()` (`clsx` + `tailwind-merge`) está em `src/lib/utils.ts`. Os tokens de tema (cores, radius, variáveis de sidebar/chart) são definidos como CSS custom properties em `src/index.css` sob `:root` / `.dark` e expostos ao Tailwind via `@theme inline`. As fontes são self-hosted via `@fontsource-variable/geist` e `@fontsource-variable/inter` (Inter é a `--font-sans` ativa).
+- **Path aliases**: `@/*` aponta para `src/*` (alias de resolve em `vite.config.ts`, espelhado nos `paths` de `tsconfig.json`/`tsconfig.app.json` e usado pelos `aliases` do shadcn em `components.json`).
+- **Testes**: o Vitest está configurado em **browser mode** (`vitest.config.ts`), rodando as specs em uma instância real do Chromium via `@vitest/browser-playwright`, com o `vitest-browser-react` fornecendo `render` e queries baseadas em locators — não jsdom + Testing Library.
+- **Lint/formatação**: Oxlint (`.oxlintrc.json`) para lint, não ESLint. O lint com informação de tipos não está habilitado no momento (exigiria `oxlint-tsgolint`). O oxfmt (`.oxfmtrc.json`) cuida da formatação, ordenação de imports e ordenação de classes do Tailwind — não Prettier.
+- **TypeScript**: setup com project references (`tsconfig.json` → `tsconfig.app.json` para `src/`, `tsconfig.node.json` para a config do Vite). Checagens estritas de locals/params não usados e `verbatimModuleSyntax` estão ativadas.
+- **Deploy**: `.github/workflows/deploy.yml` faz o build e publica `dist/` no GitHub Pages a cada push na `main` (ou disparo manual). O `base` do Vite em `vite.config.ts` está definido como `/escala-certa/` para bater com o subcaminho do Pages — mantenha os dois sincronizados se o repositório for renomeado.
+
+## Melhorias futuras
+
+As melhorias anotadas para depois ficam em `TODO.md`. Não implemente nenhum item de lá sem pedido explícito. Quando o usuário pedir para anotar algo como melhoria futura, adicione em `TODO.md`.
