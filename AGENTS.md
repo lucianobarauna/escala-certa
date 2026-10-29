@@ -17,6 +17,10 @@ O `.agents/rules/code-standards.md` e o `.oxlintrc.json` devem ficar sincronizad
 - Quando o `code-standards.md` mudar, verifique se a regra nova ou alterada pode ser aplicada automaticamente pelo Oxlint e, se fizer sentido, atualize o `.oxlintrc.json`. Regras que o Oxlint não cobre ficam apenas no documento.
 - Quando o `.oxlintrc.json` mudar (regra adicionada, removida, com limite alterado ou com nova exceção em `overrides`/`ignorePatterns`) e isso não estiver refletido no `code-standards.md`, atualize o documento para descrever a regra em português, com exemplo, e ajuste a lista de regras automáticas na seção "Formatação e Lint".
 
+As regras de testes (cobertura obrigatória, princípios FIRST, pirâmide de testes, estrutura AAA e testes E2E) ficam em `.agents/rules/tests.md`, importado abaixo — agentes que não resolvem imports com `@` devem ler esse arquivo diretamente. **Todo código deve ser coberto por testes automatizados; essa regra é crítica e não deve ser ignorada.**
+
+@.agents/rules/tests.md
+
 ## Comandos
 
 - `pnpm dev` — inicia o servidor de desenvolvimento do Vite
@@ -24,6 +28,9 @@ O `.agents/rules/code-standards.md` e o `.oxlintrc.json` devem ficar sincronizad
 - `pnpm lint` — roda o Oxlint
 - `pnpm format` / `pnpm format:check` — formata (ou verifica a formatação) com oxfmt, configurado em `.oxfmtrc.json` (também ordena imports e classes do Tailwind)
 - `pnpm test` — roda a suíte de testes (Vitest, em modo watch por padrão)
+- `pnpm test:coverage` — roda os testes uma vez com cobertura e falha se algum teste quebrar ou se a cobertura ficar abaixo de 80%
+- `pnpm test:e2e` — faz o build, sobe o `vite preview` e roda os testes E2E de `e2e/` com Playwright
+- O hook `pre-push` do Husky roda `pnpm lint`, `pnpm test:coverage` e `pnpm test:e2e`; a CI roda os mesmos comandos antes do deploy
 - `pnpm preview` — pré-visualiza o build de produção
 
 O gerenciador de pacotes é o **pnpm** (veja `pnpm-lock.yaml`). A versão do Node está fixada em `.nvmrc` (também usada pelo workflow de deploy na CI).
@@ -34,6 +41,12 @@ Os testes rodam em um navegador real via Playwright (chromium), não em jsdom. P
 
 ```
 pnpm vitest run src/components/HelloWorld/HelloWorld.spec.tsx
+```
+
+Para rodar um único teste E2E:
+
+```
+pnpm playwright test e2e/home.spec.ts
 ```
 
 ## Arquitetura
