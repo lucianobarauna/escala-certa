@@ -4,7 +4,7 @@ Este arquivo orienta agentes de IA para código (Claude Code, Codex, Cursor etc.
 
 ## Status do projeto
 
-Scaffold em estágio inicial (React 19 + TypeScript + Vite + Tailwind CSS v4 + shadcn/ui). O `src/App.tsx` não tem mais o template padrão do Vite — agora é um placeholder mínimo que conecta o `HelloWorld` e um `Button` do shadcn, ainda descartável e não uma arquitetura estabelecida.
+Scaffold em estágio inicial (React 19 + TypeScript + Vite + Tailwind CSS v4 + shadcn/ui). O `src/App.tsx` é um placeholder mínimo que conecta o `HelloWorld` e um `Button` do shadcn, ainda descartável. A estrutura de pastas a seguir está definida em `.agents/rules/folder-structure.md`, mesmo que algumas pastas ainda não existam.
 
 ## Regras
 
@@ -24,6 +24,10 @@ As regras de testes (cobertura obrigatória, princípios FIRST, pirâmide de tes
 As regras de React (componentes pequenos e funcionais, uso de `useEffect`/`useMemo`, hooks customizados, acessibilidade e estilização com Tailwind) ficam em `.agents/rules/react.md`, importado abaixo — agentes que não resolvem imports com `@` devem ler esse arquivo diretamente.
 
 @.agents/rules/react.md
+
+A estrutura de pastas (onde ficam componentes, telas, serviços, hooks, tipos, assets e testes) fica em `.agents/rules/folder-structure.md`, importado abaixo — agentes que não resolvem imports com `@` devem ler esse arquivo diretamente. Crie arquivos e pastas novos seguindo esse documento.
+
+@.agents/rules/folder-structure.md
 
 ## Comandos
 
@@ -57,7 +61,7 @@ pnpm playwright test e2e/home.spec.ts
 
 - **Ferramenta de build**: Vite, com o React Compiler habilitado via Babel (`@rolldown/plugin-babel` + `babel-plugin-react-compiler` em `vite.config.ts`). Ele cuida da memoização automaticamente.
 - **Estilização**: Tailwind CSS v4 via `@tailwindcss/vite` (sem `tailwind.config.js` — a v4 usa configuração baseada em CSS em `src/index.css`). Os componentes se apoiam em classes utilitárias do Tailwind, incluindo utilitários com valores arbitrários (ex.: `bg-(--accent-bg)`) que referenciam CSS custom properties definidas em `index.css`.
-- **Componentes de UI**: o shadcn/ui está instalado (`components.json`), configurado com o estilo `aria-nova` (construído sobre `react-aria-components`, não Radix), cor base `mist` e `lucide-react` para ícones. Os primitivos gerados ficam em `src/components/ui/` (ex.: `button.tsx`); o helper de merge de classes `cn()` (`clsx` + `tailwind-merge`) está em `src/lib/utils.ts`. Os tokens de tema (cores, radius, variáveis de sidebar/chart) são definidos como CSS custom properties em `src/index.css` sob `:root` / `.dark` e expostos ao Tailwind via `@theme inline`. As fontes são self-hosted via `@fontsource-variable/geist` e `@fontsource-variable/inter` (Inter é a `--font-sans` ativa).
+- **Componentes de UI**: o shadcn/ui está instalado (`components.json`), configurado com o estilo `aria-nova` (construído sobre `react-aria-components`, não Radix), cor base `mist` e `lucide-react` para ícones. O helper de merge de classes `cn()` usa `clsx` + `tailwind-merge`. Os tokens de tema (cores, radius, variáveis de sidebar/chart) são definidos como CSS custom properties em `src/index.css` sob `:root` / `.dark` e expostos ao Tailwind via `@theme inline`. As fontes são self-hosted via `@fontsource-variable/geist` e `@fontsource-variable/inter` (Inter é a `--font-sans` ativa).
 - **Path aliases**: `@/*` aponta para `src/*` (alias de resolve em `vite.config.ts`, espelhado nos `paths` de `tsconfig.json`/`tsconfig.app.json` e usado pelos `aliases` do shadcn em `components.json`).
 - **Testes**: o Vitest está configurado em **browser mode** (`vitest.config.ts`), rodando as specs em uma instância real do Chromium via `@vitest/browser-playwright`, com o `vitest-browser-react` fornecendo `render` e queries baseadas em locators — não jsdom + Testing Library.
 - **Lint/formatação**: Oxlint (`.oxlintrc.json`) para lint, não ESLint. O lint com informação de tipos não está habilitado no momento (exigiria `oxlint-tsgolint`). O oxfmt (`.oxfmtrc.json`) cuida da formatação, ordenação de imports e ordenação de classes do Tailwind — não Prettier.
