@@ -21,6 +21,10 @@ As regras de testes (cobertura obrigatória, princípios FIRST, pirâmide de tes
 
 @.agents/rules/tests.md
 
+As regras de React (componentes pequenos e funcionais, uso de `useEffect`/`useMemo`, hooks customizados, acessibilidade e estilização com Tailwind) ficam em `.agents/rules/react.md`, importado abaixo — agentes que não resolvem imports com `@` devem ler esse arquivo diretamente.
+
+@.agents/rules/react.md
+
 ## Comandos
 
 - `pnpm dev` — inicia o servidor de desenvolvimento do Vite

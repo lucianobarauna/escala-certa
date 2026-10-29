@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["typescript", "unicorn", "oxc", "import"],
+  "plugins": ["typescript", "unicorn", "oxc", "import", "react", "jsx-a11y"],
   "ignorePatterns": [".claude/**"],
   "categories": {
     "correctness": "error"
@@ -59,7 +59,9 @@
           }
         ]
       }
-    ]
+    ],
+    "react/rules-of-hooks": "error",
+    "react/prefer-function-component": "error"
   },
   "overrides": [
     {
