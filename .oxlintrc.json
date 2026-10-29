@@ -61,7 +61,18 @@
       }
     ],
     "react/rules-of-hooks": "error",
-    "react/prefer-function-component": "error"
+    "react/prefer-function-component": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "eqeqeq": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/consistent-type-definitions": ["error", "type"],
+    "func-style": ["error", "declaration"],
+    "prefer-arrow-callback": "error",
+    "no-nested-ternary": "error",
+    "no-unneeded-ternary": "error",
+    "typescript/no-non-null-assertion": "error",
+    "prefer-template": "error"
   },
   "overrides": [
     {

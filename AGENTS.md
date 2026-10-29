@@ -29,6 +29,10 @@ A estrutura de pastas (onde ficam componentes, telas, serviços, hooks, tipos, a
 
 @.agents/rules/folder-structure.md
 
+As regras de JavaScript e TypeScript (`const`/`let`, comparações estritas, sem `any`, `type` em vez de `interface`, tipagem de parâmetros e retornos, arrow functions em callbacks e ternários sem aninhamento) ficam em `.agents/rules/javascript-typescript.md`, importado abaixo — agentes que não resolvem imports com `@` devem ler esse arquivo diretamente. **Ao terminar cada tarefa que altere código, rode `pnpm lint` e `pnpm build` e corrija o que for apontado.**
+
+@.agents/rules/javascript-typescript.md
+
 ## Comandos
 
 - `pnpm dev` — inicia o servidor de desenvolvimento do Vite
