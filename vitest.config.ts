@@ -1,14 +1,31 @@
-import react from '@vitejs/plugin-react';
 import { playwright } from '@vitest/browser-playwright';
-import { defineConfig } from 'vitest/config';
+import { configDefaults, defineConfig, mergeConfig } from 'vitest/config';
 
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    browser: {
-      enabled: true,
-      provider: playwright(),
-      instances: [{ browser: 'chromium' }],
+import viteConfig from './vite.config';
+
+const MIN_COVERAGE_PERCENT = 80;
+
+export default mergeConfig(
+  viteConfig,
+  defineConfig({
+    test: {
+      exclude: [...configDefaults.exclude, 'e2e/**'],
+      browser: {
+        enabled: true,
+        provider: playwright(),
+        instances: [{ browser: 'chromium' }],
+      },
+      coverage: {
+        provider: 'v8',
+        include: ['src/**/*.{ts,tsx}'],
+        exclude: ['src/main.tsx', 'src/components/ui/**', 'src/**/*.spec.{ts,tsx}'],
+        thresholds: {
+          lines: MIN_COVERAGE_PERCENT,
+          functions: MIN_COVERAGE_PERCENT,
+          branches: MIN_COVERAGE_PERCENT,
+          statements: MIN_COVERAGE_PERCENT,
+        },
+      },
     },
-  },
-});
+  }),
+);
