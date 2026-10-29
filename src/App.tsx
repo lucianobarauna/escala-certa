@@ -1,6 +1,6 @@
-import HelloWorld from "./components/HelloWorld/HelloWorld";
+import { Button } from '@/components/ui/button';
 
-import { Button } from "@/components/ui/button";
+import HelloWorld from './components/HelloWorld/HelloWorld';
 
 function App() {
   return (
