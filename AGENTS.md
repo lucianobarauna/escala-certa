@@ -75,3 +75,5 @@ pnpm playwright test e2e/home.spec.ts
 ## Melhorias futuras
 
 As melhorias anotadas para depois ficam em `TODO.md`. Não implemente nenhum item de lá sem pedido explícito. Quando o usuário pedir para anotar algo como melhoria futura, adicione em `TODO.md`.
+
+<critical>SEMPRESIGA AS REGRAS DE TESTE EM ./agents/rules/tests.md e implemente os testes para o código produzido</critical>
