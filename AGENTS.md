@@ -21,9 +21,7 @@ As regras de testes (cobertura obrigatória, princípios FIRST, pirâmide de tes
 
 @.agents/rules/tests.md
 
-As regras de React (componentes pequenos e funcionais, uso de `useEffect`/`useMemo`, hooks customizados, acessibilidade e estilização com Tailwind) ficam em `.agents/rules/react.md`, importado abaixo — agentes que não resolvem imports com `@` devem ler esse arquivo diretamente.
-
-@.agents/rules/react.md
+As regras de React (componentes pequenos e funcionais, uso de `useEffect`/`useMemo`, hooks customizados, acessibilidade, estilização com Tailwind, pureza, estado, keys, efeitos, refs, Context e formulários com Actions) ficam na skill `react-patterns`, em `.agents/skills/react-patterns/SKILL.md`, com os exemplos em `examples/`. **Antes de qualquer implementação no frontend (criar, alterar ou revisar código em `src/`: componentes, hooks, telas, formulários, estilos ou testes de componentes), carregue essa skill** — no Claude Code, via ferramenta `Skill` com `react-patterns`; agentes que não carregam skills devem ler o `SKILL.md` diretamente e abrir o exemplo de cada regra que forem aplicar.
 
 A estrutura de pastas (onde ficam componentes, telas, serviços, hooks, tipos, assets e testes) fica em `.agents/rules/folder-structure.md`, importado abaixo — agentes que não resolvem imports com `@` devem ler esse arquivo diretamente. Crie arquivos e pastas novos seguindo esse documento.
 
@@ -76,4 +74,6 @@ pnpm playwright test e2e/home.spec.ts
 
 As melhorias anotadas para depois ficam em `TODO.md`. Não implemente nenhum item de lá sem pedido explícito. Quando o usuário pedir para anotar algo como melhoria futura, adicione em `TODO.md`.
 
-<critical>SEMPRESIGA AS REGRAS DE TESTE EM ./agents/rules/tests.md e implemente os testes para o código produzido</critical>
+<critical>SEMPRE SIGA AS REGRAS DE TESTE EM `.agents/rules/tests.md` e implemente os testes para o código produzido</critical>
+
+<critical>SEMPRE CARREGUE A SKILL `react-patterns` (.agents/skills/react-patterns/SKILL.md) ANTES DE QUALQUER IMPLEMENTAÇÃO NO FRONTEND (código em `src/`)</critical>

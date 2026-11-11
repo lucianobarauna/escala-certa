@@ -1,6 +1,6 @@
 # Estrutura de Pastas
 
-Onde cada tipo de arquivo fica neste repositório. Como escrever o código dentro dessas pastas está em `.agents/rules/code-standards.md`, `.agents/rules/react.md` e `.agents/rules/tests.md`.
+Onde cada tipo de arquivo fica neste repositório. Como escrever o código dentro dessas pastas está em `.agents/rules/code-standards.md`, `.agents/rules/tests.md` e na skill `react-patterns` (`.agents/skills/react-patterns/SKILL.md`).
 
 ## Visão geral
 

@@ -1,6 +1,6 @@
 # Padrões de JavaScript e TypeScript
 
-Como escrever JavaScript e TypeScript neste repositório. As regras gerais de código limpo (tamanho de funções, comentários, constantes) estão em `.agents/rules/code-standards.md` e as de React em `.agents/rules/react.md`.
+Como escrever JavaScript e TypeScript neste repositório. As regras gerais de código limpo (tamanho de funções, comentários, constantes) estão em `.agents/rules/code-standards.md` e as de React na skill `react-patterns` (`.agents/skills/react-patterns/SKILL.md`).
 
 ## Variáveis: `const` por padrão, nunca `var`
 
