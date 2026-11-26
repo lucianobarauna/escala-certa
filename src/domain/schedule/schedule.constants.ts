@@ -1,11 +1,13 @@
 import type {
   DayState,
+  ScheduleType,
   ShiftCycle,
   ShiftTurn,
   ShiftVariant,
   WeeklyModality,
 } from '@/types/schedule';
 
+export const SCHEDULE_TYPES: readonly ScheduleType[] = ['shift', 'weekly'];
 export const SHIFT_CYCLES: readonly ShiftCycle[] = ['12x36', '24x48', '24x72'];
 export const SHIFT_TURNS: readonly ShiftTurn[] = ['day', 'night'];
 export const WEEKLY_MODALITIES: readonly WeeklyModality[] = ['5x2', '6x1'];
@@ -34,3 +36,6 @@ export const MS_PER_DAY = 86_400_000;
 export const MIN_TEXT_SIZE = 100;
 export const MAX_TEXT_SIZE = 200;
 export const TEXT_SIZE_STEP = 25;
+
+export const MAX_QUERY_LENGTH = 2000;
+export const URL_VERSION = '1';

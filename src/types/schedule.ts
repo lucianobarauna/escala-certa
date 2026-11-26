@@ -62,3 +62,8 @@ export type ConfigIssue = {
   field?: string;
   message: string;
 };
+
+export type ParseResult = {
+  draft: ScheduleDraft;
+  issues: ConfigIssue[];
+};

@@ -7,7 +7,7 @@ type ModalityChange = {
   offDaysCleared: boolean;
 };
 
-function createEmptyWeeks(weeks: number) {
+export function createEmptyWeeks(weeks: number) {
   return Array.from({ length: weeks }, (): number[] => []);
 }
 
