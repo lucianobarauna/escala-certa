@@ -8,7 +8,7 @@ Ordem de construção de baixo para cima na pirâmide de testes (domínio → se
 - [x] 2.0 Mês, nome acessível e resumo
 - [x] 3.0 Codec da URL versionada
 - [x] 4.0 Infra e serviços (storage, compartilhamento, analytics, consentimento)
-- [ ] 5.0 Hooks de estado
+- [x] 5.0 Hooks de estado
 - [ ] 6.0 Formulários de entrada
 - [ ] 7.0 Preview do mês
 - [ ] 8.0 Compartilhar, tamanho de texto, aviso, privacidade e consentimento

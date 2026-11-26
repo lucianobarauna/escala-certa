@@ -23,11 +23,11 @@ Cria os hooks que ligam o domínio e os serviços à interface: rascunho da esca
 
 ## Subtarefas
 
-- [ ] 5.1 Implementar `src/hooks/useMetricsConsent.ts` + spec.
-- [ ] 5.2 Implementar `src/components/TextSizeControl/useTextSize.ts` + spec.
-- [ ] 5.3 Implementar `src/views/HomeView/useMonthNavigation.ts` + spec.
-- [ ] 5.4 Implementar `src/views/HomeView/useScheduleConfig.ts` (inicialização pela URL, `replaceState`, rastreio de escala completada) + spec.
-- [ ] 5.5 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
+- [x] 5.1 Implementar `src/hooks/useMetricsConsent.ts` + spec.
+- [x] 5.2 Implementar `src/components/TextSizeControl/useTextSize.ts` + spec.
+- [x] 5.3 Implementar `src/views/HomeView/useMonthNavigation.ts` + spec.
+- [x] 5.4 Implementar `src/views/HomeView/useScheduleConfig.ts` (inicialização pela URL, `replaceState`, rastreio de escala completada) + spec.
+- [x] 5.5 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
 
 ## Detalhes de implementação
 
@@ -45,44 +45,44 @@ Ver `techspec.md`: tabela "Hooks", fluxo de dados, "Efeitos: `replaceState`, `tr
 
 `useTextSize.spec.ts`
 
-- [ ] 79. Inicia em 100 sem preferência.
-- [ ] 80. Restaura valor guardado; ignora valor inválido ("abc", 90, 300).
-- [ ] 81. Aumentar/diminuir em passos de 25; limites 100 e 200 desabilitam a ação e informam o motivo (RF50).
-- [ ] 82. "Tamanho padrão" volta a 100.
-- [ ] 83. Aplica o percentual no `<html>` e limpa ao desmontar.
-- [ ] 84. Persiste a cada mudança; armazenamento que lança erro não quebra e funciona sem lembrar (RF51).
-- [ ] 85. Dispara `text_size_changed` com o nível (mesmo valor repetido não dispara).
-- [ ] 86. Mensagem "Texto em 150%".
+- [x] 79. Inicia em 100 sem preferência.
+- [x] 80. Restaura valor guardado; ignora valor inválido ("abc", 90, 300).
+- [x] 81. Aumentar/diminuir em passos de 25; limites 100 e 200 desabilitam a ação e informam o motivo (RF50).
+- [x] 82. "Tamanho padrão" volta a 100.
+- [x] 83. Aplica o percentual no `<html>` e limpa ao desmontar.
+- [x] 84. Persiste a cada mudança; armazenamento que lança erro não quebra e funciona sem lembrar (RF51).
+- [x] 85. Dispara `text_size_changed` com o nível (mesmo valor repetido não dispara).
+- [x] 86. Mensagem "Texto em 150%".
 
 `useMetricsConsent.spec.ts` (camada de hook dos casos 87–92)
 
-- [ ] 87. Estado inicial `unknown` sem preferência; `granted`/`denied` quando guardado.
-- [ ] 88. GPC ativo: `denied`, sem banner, nada carregado (RF60).
-- [ ] 89. `accept` persiste e habilita o analytics; `refuse` persiste e não habilita.
-- [ ] 90. Revogar após aceitar desabilita, define `ga-disable` e apaga cookies `_ga*`.
-- [ ] 91. Armazenamento indisponível: vale na visita; `unknown` na próxima.
-- [ ] 92. Valor inválido no storage é tratado como `unknown`.
+- [x] 87. Estado inicial `unknown` sem preferência; `granted`/`denied` quando guardado.
+- [x] 88. GPC ativo: `denied`, sem banner, nada carregado (RF60).
+- [x] 89. `accept` persiste e habilita o analytics; `refuse` persiste e não habilita.
+- [x] 90. Revogar após aceitar desabilita, define `ga-disable` e apaga cookies `_ga*`.
+- [x] 91. Armazenamento indisponível: vale na visita; `unknown` na próxima.
+- [x] 92. Valor inválido no storage é tratado como `unknown`.
 
 `useMonthNavigation.spec.ts` (derivados de RF28, RF29, US8)
 
-- [ ] Inicia no mês atual (relógio fixo em 26/11/2026).
-- [ ] Anterior/próximo atravessam dezembro↔janeiro sem limite.
-- [ ] `isCurrentMonth` é falso fora do mês atual e "hoje" volta ao mês atual.
+- [x] Inicia no mês atual (relógio fixo em 26/11/2026).
+- [x] Anterior/próximo atravessam dezembro↔janeiro sem limite.
+- [x] `isCurrentMonth` é falso fora do mês atual e "hoje" volta ao mês atual.
 
 `useScheduleConfig.spec.ts` (derivados de RF35, RF36, RF38, RF57)
 
-- [ ] Inicializa o rascunho a partir da URL válida e devolve `issues` para link inválido.
-- [ ] Cada alteração chama `replaceState` com a query serializada e `history.length` não cresce.
-- [ ] `schedule_completed` dispara uma vez ao completar, não repete ao mudar marcações e repete ao mudar tipo/turno/modalidade.
-- [ ] Com analytics desabilitado, nada é enviado e nada lança.
+- [x] Inicializa o rascunho a partir da URL válida e devolve `issues` para link inválido.
+- [x] Cada alteração chama `replaceState` com a query serializada e `history.length` não cresce.
+- [x] `schedule_completed` dispara uma vez ao completar, não repete ao mudar marcações e repete ao mudar tipo/turno/modalidade.
+- [x] Com analytics desabilitado, nada é enviado e nada lança.
 
 ### Testes de integração
 
-- [ ] A integração real dos hooks com a tela é coberta na tarefa 9.0 (integração 16, 22, 23).
+- [x] A integração real dos hooks com a tela é coberta na tarefa 9.0 (integração 16, 22, 23).
 
 ### Testes E2E (se aplicável)
 
-- [ ] Não se aplica (cobertos na tarefa 10.0).
+- [x] Não se aplica (cobertos na tarefa 10.0).
 
 ## Arquivos relevantes
 
