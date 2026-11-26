@@ -3,7 +3,7 @@ name: escala-certa
 created: 2026-10-29
 updated: 2026-11-26
 status: active
-revisions: 6
+revisions: 7
 ---
 
 # Brainstorm: Escala Certa — preview visual de escalas de trabalho que se repetem
@@ -26,7 +26,7 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 ### Hard Constraints
 
 - Sem backend e sem login: todo o cálculo acontece no navegador, compatível com hospedagem estática.
-- Métricas de uso apenas agregadas, por um serviço externo sem cookies, sem identificar a pessoa ou o aparelho, sem guardar o IP e sem receber nenhuma parte do conteúdo do link, com opção de recusa na própria página.
+- Métricas de uso pelo Google Analytics 4, somente após o consentimento da pessoa, sem receber nenhuma parte do conteúdo do link (nome, datas e folgas nunca saem), sem recursos de publicidade e com opção de recusar e revogar a qualquer momento.
 - Acessível: navegação completa por teclado, compatível com leitor de tela, estados que não dependem só de cor e contraste mínimo WCAG AA.
 - Acessível para baixa visão: a interface respeita o tamanho de fonte configurado no navegador ou no sistema e continua utilizável com texto ampliado até 200% e zoom até 400%, sem cortar ou sobrepor conteúdo e sem rolagem horizontal. Os indicadores de estado e o foco visível têm contraste mínimo de 3:1 com o fundo.
 - Somente escalas que se repetem na primeira versão: plantão (12x36 diurno e noturno, 24x48, 24x72) e escala semanal (5x2 e 6x1) com padrão de folgas de 1 a 7 semanas.
@@ -36,7 +36,7 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 ### Soft Constraints
 
 - Pensado primeiro para celular.
-- Nada da escala é salvo no dispositivo; a única forma de "lembrar" a escala é o próprio link. As exceções são a preferência de tamanho de texto, que é ajuste de leitura, e a recusa de métricas, que é escolha de privacidade; nenhuma delas é dado da escala.
+- Nada da escala é salvo no dispositivo; a única forma de "lembrar" a escala é o próprio link. As exceções são a preferência de tamanho de texto, que é ajuste de leitura, e a escolha sobre as métricas, que é escolha de privacidade (além dos cookies de medição, que só existem após o consentimento); nenhuma delas é dado da escala.
 - Marcação por dia, sem horários dos turnos.
 
 ## Success Criteria
@@ -66,7 +66,7 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 - **Rótulo "Em casa" para a folga** — rejected: "folga" é o termo usado pelo público nas escalas de plantão e na escala semanal.
 - **Diferenciar o dia de plantão noturno ("livre durante o dia")** — rejected por agora: exige modelar horários, fora do escopo; possível extensão quando houver horários.
 - **Sem métricas de uso, só testes de usabilidade** — rejected: os testes validam a interface, mas não mostram se o produto é usado nem quais escalas importam, o que deixaria decisões como manter a 6x1 sem dados.
-- **Analytics com cookies ou identificação da pessoa** — rejected: exige banner de consentimento, que piora a experiência no celular e costuma ser barreira de acessibilidade, e contraria a proposta de privacidade.
+- **Analytics com cookies ou identificação da pessoa** — rejected em 2026-11-26 e depois revisto (ver Revision History): o argumento era que exige banner de consentimento, que piora a experiência no celular e costuma ser barreira de acessibilidade. Decidiu-se aceitar o banner, desde que acessível (RF65) e sem bloquear o uso do app.
 - **Analytics próprio hospedado** — rejected: exige servidor, contrariando a restrição de não ter backend.
 
 ## Decision
@@ -92,7 +92,7 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 - Com fonte ampliada, o calendário se reorganiza em vez de encolher o texto: as células crescem junto com a fonte e, quando a grade de 7 colunas não couber na largura da tela, o mês passa a ser exibido como lista de dias, mantendo os mesmos estados, ícones e legenda. A marcação das folgas do padrão semanal segue o mesmo princípio.
 - Abaixo do calendário, um resumo do mês exibido com o total de dias de trabalho e de folga, em que as folgas de saída do plantão entram no total e aparecem entre parênteses (ex.: "Dezembro de 2026: 11 dias de plantão, 20 dias de folga (10 com saída do plantão pela manhã)"), anunciado a leitores de tela quando o mês ou a escala mudam.
 - Toda a configuração da escala fica refletida no endereço da página; abrir o link restaura o preview.
-- Métricas agregadas de acessos e de poucos eventos (tipo de escala, quantidade de semanas, compartilhamento e uso do controle de texto), sem nada do conteúdo do link, com um link "Privacidade" que explica o que é medido e oferece a opção "Não registrar minhas visitas neste aparelho".
+- Métricas de acessos e de poucos eventos (tipo de escala, quantidade de semanas, compartilhamento e uso do controle de texto) no GA4, só com consentimento, sem nada do conteúdo do link, com aviso de consentimento e um link "Privacidade" que explica o que é medido e permite alterar a escolha a qualquer momento.
 - Nome opcional da escala (ex.: "Escala da Ana"), exibido no topo do preview e incluído no link, para identificar de quem é a escala ao reabrir ou ao receber de outra pessoa. Junto ao campo, um aviso visível informa que o nome vai no link.
 - Ação **Compartilhar escala**: no celular, abre o menu de compartilhamento nativo do sistema; onde ele não existe, copia o link. A confirmação ("Link copiado") é exibida e anunciada a leitores de tela. Quem recebe o link vê a mesma tela, com o mesmo preview, e pode ajustar a configuração sem afetar o link original.
 
@@ -106,7 +106,7 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 - O dia de saída do plantão é tratado como um dia inteiro de folga, embora a pessoa só fique livre a partir da manhã — aceitável enquanto o produto não modela horários; o rótulo "Folga (saída do plantão)" e a legenda deixam isso explícito.
 - O resumo soma as folgas de saída ao total de folgas — aceitável porque é assim que o público conta as folgas; a quantidade de folgas de saída continua visível entre parênteses.
 - A modalidade 6x1 continua na primeira versão apesar da EC 141/2026 — aceitável porque ela segue valendo na transição e nos setores de exceção, e o custo é baixo: usa o mesmo modelo de padrão semanal do 5x2.
-- As métricas dependem de um serviço externo e de um script de terceiros, e bloqueadores de conteúdo fazem os números ficarem abaixo do real — aceitável porque servem para tendências e proporções, e o app funciona normalmente se o serviço falhar.
+- As métricas dependem de um serviço externo e de um script de terceiros, e quem recusa o consentimento e os bloqueadores de conteúdo fazem os números ficarem abaixo do real — aceitável porque servem para tendências e proporções, e o app funciona normalmente se o serviço falhar.
 - O nome da escala, quando preenchido, viaja no link e pode ficar no histórico de conversas e em pré-visualizações de link — aceitável porque o campo é opcional, não exige nome real e a interface avisa disso; o link não carrega nenhum outro dado pessoal.
 - Quem recebe escala mensal sem padrão, ou só conhece as folgas da semana atual, não é atendido — aceitável porque nenhum modelo de repetição cobre esse caso sem remarcação mensal.
 
@@ -125,6 +125,13 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 - [ ] A definir: Manter a modalidade 6x1 depois da transição da EC 141/2026? Revisar quando as exceções por setor estiverem confirmadas no texto oficial.
 
 ## Revision History
+
+### 2026-11-26 — Pivot
+
+**From:** Métricas por um serviço externo sem cookies, sem guardar o IP, sem banner de consentimento, com opção de recusa no texto de privacidade.
+**To:** Google Analytics 4 carregado somente após o consentimento (banner com "Aceitar métricas" e "Recusar métricas" de igual peso), base legal da LGPD no consentimento, sinal de recusa (GPC) tratado como recusa e revogação a qualquer momento no texto de privacidade.
+**Trigger:** Ao detalhar a TechSpec, o usuário preferiu o GA4 à alternativa sem cookies, pela familiaridade, pelos eventos com parâmetros e pelos relatórios prontos.
+**Trade-offs reassessed:** Volta o banner de consentimento, antes rejeitado pelo custo em experiência e acessibilidade; a mitigação é um aviso acessível, que não bloqueia o app nem prende o foco. Os números ficam ainda mais aproximados, porque quem recusa não é medido. A promessa de privacidade passa a depender da configuração do GA4 (sem sinais de publicidade, retenção mínima, `page_location` sem query), verificada antes do lançamento. A validade do consentimento e a transferência internacional de dados para o Google devem ser confirmadas com um especialista em LGPD.
 
 ### 2026-11-26 — Refinement
 

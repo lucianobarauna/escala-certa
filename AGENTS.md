@@ -70,6 +70,14 @@ pnpm playwright test e2e/home.spec.ts
 - **TypeScript**: setup com project references (`tsconfig.json` → `tsconfig.app.json` para `src/`, `tsconfig.node.json` para a config do Vite). Checagens estritas de locals/params não usados e `verbatimModuleSyntax` estão ativadas.
 - **Deploy**: `.github/workflows/deploy.yml` faz o build e publica `dist/` no GitHub Pages a cada push na `main` (ou disparo manual). O `base` do Vite em `vite.config.ts` está definido como `/escala-certa/` para bater com o subcaminho do Pages — mantenha os dois sincronizados se o repositório for renomeado.
 
+## Documentos de produto
+
+O brainstorm (`docs/product/brainstorm.md`) descreve o **produto inteiro**; cada PRD (`tasks/prd-<funcionalidade>/prd.md`) e sua TechSpec (`techspec.md`) descrevem uma **funcionalidade**.
+
+- Ao terminar uma mudança em um PRD, **pergunte ao usuário** se ela afeta o brainstorm (visão, restrição dura, escopo geral, alternativa rejeitada ou risco do produto todo). Só atualize o brainstorm se ele confirmar; nesse caso, registre no _Revision History_ e ajuste `revisions` e `updated`.
+- Quando um PRD mudar, verifique se a TechSpec da mesma funcionalidade continua válida.
+- Pendências geradas pela mudança (ex.: jurídicas) vão para o `TODO.md`.
+
 ## Melhorias futuras
 
 As melhorias anotadas para depois ficam em `TODO.md`. Não implemente nenhum item de lá sem pedido explícito. Quando o usuário pedir para anotar algo como melhoria futura, adicione em `TODO.md`.
