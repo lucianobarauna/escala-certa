@@ -26,13 +26,13 @@ Cria os utilitários de navegador (`safe-storage`, `share-link`) e os serviços 
 
 ## Subtarefas
 
-- [ ] 4.1 Implementar `src/lib/safe-storage.ts` + spec.
-- [ ] 4.2 Implementar `src/lib/share-link.ts` + spec.
-- [ ] 4.3 Implementar `src/services/analytics.events.ts` + spec.
-- [ ] 4.4 Implementar `src/services/analytics.service.ts` (no-op por padrão, carga sob demanda, saneamento) + spec.
-- [ ] 4.5 Implementar `src/services/consent.service.ts` (estado, GPC, persistência, revogação) + spec.
-- [ ] 4.6 Criar `.env.example` e declarar o tipo da variável em `vite-env.d.ts`.
-- [ ] 4.7 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
+- [x] 4.1 Implementar `src/lib/safe-storage.ts` + spec.
+- [x] 4.2 Implementar `src/lib/share-link.ts` + spec.
+- [x] 4.3 Implementar `src/services/analytics.events.ts` + spec.
+- [x] 4.4 Implementar `src/services/analytics.service.ts` (no-op por padrão, carga sob demanda, saneamento) + spec.
+- [x] 4.5 Implementar `src/services/consent.service.ts` (estado, GPC, persistência, revogação) + spec.
+- [x] 4.6 Criar `.env.example` e declarar o tipo da variável em `vite-env.d.ts`.
+- [x] 4.7 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
 
 ## Detalhes de implementação
 
@@ -50,50 +50,50 @@ Ver `techspec.md`: tabela de infraestrutura e serviços, "Principais interfaces"
 
 `consent.service.spec.ts` (camada de serviço dos casos 87–92)
 
-- [ ] 87. Estado inicial `unknown` sem preferência; `granted`/`denied` quando guardado.
-- [ ] 88. GPC ativo: `denied`, sem banner, nada carregado (RF60).
-- [ ] 89. `accept` persiste e habilita o analytics; `refuse` persiste e não habilita.
-- [ ] 90. Revogar após aceitar desabilita, define `ga-disable` e apaga cookies `_ga*`.
-- [ ] 91. Armazenamento indisponível: vale na visita; `unknown` na próxima.
-- [ ] 92. Valor inválido no storage é tratado como `unknown`.
+- [x] 87. Estado inicial `unknown` sem preferência; `granted`/`denied` quando guardado.
+- [x] 88. GPC ativo: `denied`, sem banner, nada carregado (RF60).
+- [x] 89. `accept` persiste e habilita o analytics; `refuse` persiste e não habilita.
+- [x] 90. Revogar após aceitar desabilita, define `ga-disable` e apaga cookies `_ga*`.
+- [x] 91. Armazenamento indisponível: vale na visita; `unknown` na próxima.
+- [x] 92. Valor inválido no storage é tratado como `unknown`.
 
 `analytics.service.spec.ts` (criticidade alta)
 
-- [ ] 93. Desabilitado: `track` não injeta script, não cria `dataLayer`, não lança.
-- [ ] 94. Habilitado: injeta `gtag.js` uma única vez e configura com os parâmetros fixados.
-- [ ] 95. `page_view` enviado uma vez por visita com `has_schedule` correto.
-- [ ] 96. Todo payload usa `page_location` sem query e `page_title` fixo, mesmo com nome e query presentes.
-- [ ] 97. Teste de contrato: nenhuma chave/valor contém nome, datas, folgas ou a URL do rascunho.
-- [ ] 98. `onerror` do script e exceção em `gtag` são engolidos (RF61).
-- [ ] 99. Sem `VITE_GA_MEASUREMENT_ID`: no-op.
-- [ ] 100. Revogação após carga bloqueia eventos seguintes.
+- [x] 93. Desabilitado: `track` não injeta script, não cria `dataLayer`, não lança.
+- [x] 94. Habilitado: injeta `gtag.js` uma única vez e configura com os parâmetros fixados.
+- [x] 95. `page_view` enviado uma vez por visita com `has_schedule` correto.
+- [x] 96. Todo payload usa `page_location` sem query e `page_title` fixo, mesmo com nome e query presentes.
+- [x] 97. Teste de contrato: nenhuma chave/valor contém nome, datas, folgas ou a URL do rascunho.
+- [x] 98. `onerror` do script e exceção em `gtag` são engolidos (RF61).
+- [x] 99. Sem `VITE_GA_MEASUREMENT_ID`: no-op.
+- [x] 100. Revogação após carga bloqueia eventos seguintes.
 
 `analytics.events.spec.ts`
 
-- [ ] 101. `schedule_completed` para plantão (variant `12x36-night`, `weeks: 0`) e semanal (`6x1`, `weeks: 7`).
-- [ ] 102. `schedule_shared` com cada método; `text_size_changed` com cada nível.
+- [x] 101. `schedule_completed` para plantão (variant `12x36-night`, `weeks: 0`) e semanal (`6x1`, `weeks: 7`).
+- [x] 102. `schedule_shared` com cada método; `text_size_changed` com cada nível.
 
 `share-link.spec.ts`
 
-- [ ] 103. Share nativo: chama `navigator.share` com título, texto (com nome) e URL → `'native'`.
-- [ ] 104. Sem nome: texto sem o nome.
-- [ ] 105. `AbortError` → `'cancelled'`, sem cair para a cópia.
-- [ ] 106. Outro erro do share → tenta a cópia.
-- [ ] 107. Sem `navigator.share` → `clipboard.writeText` → `'clipboard'`.
-- [ ] 108. `canShare` falso → cópia.
-- [ ] 109. Clipboard ausente ou rejeitado → `'manual'`.
+- [x] 103. Share nativo: chama `navigator.share` com título, texto (com nome) e URL → `'native'`.
+- [x] 104. Sem nome: texto sem o nome.
+- [x] 105. `AbortError` → `'cancelled'`, sem cair para a cópia.
+- [x] 106. Outro erro do share → tenta a cópia.
+- [x] 107. Sem `navigator.share` → `clipboard.writeText` → `'clipboard'`.
+- [x] 108. `canShare` falso → cópia.
+- [x] 109. Clipboard ausente ou rejeitado → `'manual'`.
 
 `safe-storage.spec.ts`
 
-- [ ] 110. Lê/escreve normalmente; `getItem` e `setItem` que lançam caem para memória; memória não vaza entre testes.
+- [x] 110. Lê/escreve normalmente; `getItem` e `setItem` que lançam caem para memória; memória não vaza entre testes.
 
 ### Testes de integração
 
-- [ ] Sem testes próprios: serviços integram com a tela nas tarefas 8.0 (integração 9, 11, 12) e 9.0 (integração 23, 24, 25).
+- [x] Sem testes próprios: serviços integram com a tela nas tarefas 8.0 (integração 9, 11, 12) e 9.0 (integração 23, 24, 25).
 
 ### Testes E2E (se aplicável)
 
-- [ ] Não se aplica (cobertos na tarefa 10.0, `consent-analytics.spec.ts` e `schedule-share.spec.ts`).
+- [x] Não se aplica (cobertos na tarefa 10.0, `consent-analytics.spec.ts` e `schedule-share.spec.ts`).
 
 ## Arquivos relevantes
 
