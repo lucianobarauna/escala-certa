@@ -8,7 +8,7 @@ O valor está em olhar para frente no tempo de forma visual e responder sozinho,
 
 ## Objetivos
 
-As metas de tempo, compreensão e acessibilidade são verificadas em sessões de teste de usabilidade e em auditorias de acessibilidade. As métricas de uso, coletadas de forma agregada e sem identificar ninguém (funcionalidade 9), complementam os testes e orientam decisões de produto; elas não substituem os testes.
+As metas de tempo, compreensão e acessibilidade são verificadas em sessões de teste de usabilidade e em auditorias de acessibilidade. As métricas de uso, coletadas pelo Google Analytics 4 apenas com o consentimento da pessoa e sem enviar o conteúdo do link (funcionalidade 9), complementam os testes e orientam decisões de produto; elas não substituem os testes.
 
 - **Resposta rápida:** com a escala já aberta pelo link, ao menos 90% dos participantes respondem corretamente "trabalho no dia X?" para uma data dos próximos 3 meses em até 10 segundos.
 - **Configuração de plantão:** ao menos 90% dos participantes com escala de plantão configuram a própria escala sem ajuda em até 1 minuto.
@@ -25,7 +25,7 @@ Para os testes de usabilidade, a meta é ter ao menos 5 participantes por perfil
 
 **Métricas de uso acompanhadas**
 
-As métricas indicam tendências e proporções, não totais exatos, porque bloqueadores de conteúdo impedem parte dos registros.
+As métricas indicam tendências e proporções, não totais exatos, porque quem recusa as métricas e os bloqueadores de conteúdo impedem parte dos registros.
 
 - **Acessos:** visitas por semana e proporção das que chegam por um link com escala (indica reabertura e compartilhamento).
 - **Tipos de escala:** distribuição entre as escalas de plantão (com turno) e as modalidades semanais; a participação da 6x1 orienta a revisão da modalidade após a EC 141/2026.
@@ -189,27 +189,28 @@ As métricas indicam tendências e proporções, não totais exatos, porque bloq
 - RF48: Deve existir um controle visível de tamanho de texto com as ações "Diminuir texto", "Tamanho padrão" e "Aumentar texto", cada uma com rótulo acessível.
 - RF49: O controle deve oferecer níveis de 100% a 200% em passos de 25%, aplicados sobre o tamanho de fonte configurado no navegador ou no sistema, sem substituí-lo.
 - RF50: O tamanho atual deve ser exibido e anunciado a leitores de tela a cada mudança (ex.: "Texto em 150%"); nos limites, a ação indisponível deve informar o motivo.
-- RF51: O tamanho escolhido deve ser lembrado no aparelho entre visitas, como preferência local; junto com a recusa de métricas (RF64), é a única informação guardada no dispositivo e não vai no link. Se o aparelho não permitir guardar, o controle deve funcionar normalmente sem lembrar.
+- RF51: O tamanho escolhido deve ser lembrado no aparelho entre visitas, como preferência local; junto com a escolha sobre métricas (RF64), é a única informação que o app guarda no dispositivo por conta própria e não vai no link. Se o aparelho não permitir guardar, o controle deve funcionar normalmente sem lembrar.
 - RF52: Com o texto ampliado (pelo controle, pelo navegador ou pelo sistema), as células do calendário devem crescer junto com o texto, sem cortar, sobrepor ou reduzir o conteúdo.
 - RF53: Quando a grade de 7 colunas não couber na largura disponível, o mês deve ser exibido como lista de dias, com os mesmos estados, ícones, destaque de hoje, nomes acessíveis e legenda.
 - RF54: A marcação das folgas do padrão semanal deve seguir o mesmo princípio, passando para um formato em lista quando os 7 dias não couberem lado a lado.
 
-### 9. Métricas de uso agregadas
+### 9. Métricas de uso com consentimento
 
-**O que faz:** registra, de forma agregada e anônima, os acessos à página e alguns eventos de uso.
+**O que faz:** registra, com a permissão da pessoa, os acessos à página e alguns eventos de uso no Google Analytics 4 (GA4).
 **Por que é importante:** os testes de usabilidade mostram se a interface funciona; só as métricas mostram se o produto é usado, como chega às pessoas e quais escalas importam, o que embasa decisões como manter a modalidade 6x1.
-**Como funciona:** um serviço externo de métricas sem cookies recebe apenas contagens de acessos e eventos, nunca o conteúdo do link.
+**Como funciona:** na primeira visita, um aviso pede a escolha entre aceitar e recusar; nada é carregado nem registrado antes de aceitar. Os registros contêm apenas contagens de acessos e eventos, nunca o conteúdo do link.
 
-- RF55: O app deve registrar os acessos à página, indicando apenas se a visita chegou com uma escala no link (sim ou não).
-- RF56: O app deve registrar os eventos: escala completada (com tipo de escala, turno ou modalidade e quantidade de semanas do padrão), uso de "Compartilhar escala" (com a forma usada: menu nativo, link copiado ou cópia manual) e uso do controle de tamanho de texto (com o nível escolhido).
+- RF55: Com o consentimento, o app deve registrar os acessos à página, indicando apenas se a visita chegou com uma escala no link (sim ou não).
+- RF56: Com o consentimento, o app deve registrar os eventos: escala completada (com tipo de escala, turno ou modalidade e quantidade de semanas do padrão), uso de "Compartilhar escala" (com a forma usada: menu nativo, link copiado ou cópia manual) e uso do controle de tamanho de texto (com o nível escolhido).
 - RF57: O evento de escala completada deve ser registrado uma vez por visita, quando a escala fica completa, e de novo apenas se o tipo de escala, o turno ou a modalidade mudarem, para que as contagens não cresçam a cada marcação.
-- RF58: Nenhum registro pode conter o nome da escala, as datas de referência, as folgas marcadas, o endereço com a configuração ou qualquer outra parte do link.
-- RF59: As métricas não podem usar cookies, guardar dados no aparelho (exceto a recusa do RF64), criar identificador de pessoa ou de aparelho, gravar a sessão nem rastrear a pessoa entre sites.
-- RF60: Quando o navegador enviar um sinal de recusa de rastreamento (ex.: Global Privacy Control), nada deve ser registrado.
+- RF58: Nenhum registro enviado ao GA4 pode conter o nome da escala, as datas de referência, as folgas marcadas, o endereço com a configuração ou qualquer outra parte do link; o endereço da página enviado ao serviço deve conter apenas o caminho base, sem parâmetros.
+- RF59: Antes do consentimento, o app não pode carregar o código do serviço, enviar nenhum registro nem criar cookies de medição. Depois dele, o app não pode usar recursos de publicidade ou personalização, definir identificador de pessoa próprio, gravar a sessão nem cruzar dados com outros serviços.
+- RF60: Quando o navegador enviar um sinal de recusa de rastreamento (ex.: Global Privacy Control), o app deve tratá-lo como recusa, sem exibir o aviso e sem registrar nada.
 - RF61: Se o serviço de métricas estiver bloqueado, indisponível ou lento, o app deve funcionar normalmente, sem erros visíveis e sem atrasar a página ou o preview.
-- RF62: A página deve oferecer um texto curto sobre privacidade, alcançável a partir de um link "Privacidade", que explique o que é medido, o que nunca é coletado e que a escala fica apenas no link; abrir esse texto não pode apagar a escala configurada.
-- RF63: O serviço de métricas não pode guardar o endereço IP nem dados derivados dele que permitam identificar a pessoa; esse é um critério obrigatório na escolha do serviço.
-- RF64: O texto de privacidade deve oferecer a opção "Não registrar minhas visitas neste aparelho", que pode ser ativada e desativada a qualquer momento, com o estado atual visível e anunciado a leitores de tela. Com a opção ativa, nada é registrado. A escolha fica guardada no aparelho como preferência local, não vai no link e, se o aparelho não permitir guardar, vale apenas para a visita atual.
+- RF62: A página deve oferecer um texto curto sobre privacidade, alcançável a partir de um link "Privacidade", que explique o que é medido, quem trata os dados (Google), quais cookies são usados após o consentimento, o que nunca é coletado e que a escala fica apenas no link; abrir esse texto não pode apagar a escala configurada.
+- RF63: O GA4 deve ser configurado com os recursos de publicidade e de sinais de usuários desativados e com o menor prazo de retenção de dados disponível; essas configurações devem ser verificadas antes do lançamento.
+- RF64: Na primeira visita, e enquanto não houver escolha guardada, deve aparecer um aviso com as ações "Aceitar métricas" e "Recusar métricas", com o mesmo destaque e sem pré-seleção. A escolha fica guardada no aparelho como preferência local, não vai no link e pode ser alterada a qualquer momento no texto de privacidade, com o estado atual visível e anunciado a leitores de tela. Recusar não pode limitar nenhuma função do app. Se o aparelho não permitir guardar, a escolha vale apenas para a visita atual e o aviso reaparece na próxima.
+- RF65: O aviso de consentimento deve ser acessível por teclado e leitor de tela, anunciado quando aparecer, sem prender o foco, sem cobrir o preview nem a entrada, utilizável com texto ampliado a 200% e zoom a 400% e, ao receber a escolha, devolver o foco a um ponto lógico da página.
 
 ## Experiência do usuário
 
@@ -240,6 +241,7 @@ As métricas indicam tendências e proporções, não totais exatos, porque bloq
 - Mensagens de erro, avisos e confirmações sempre em texto, perto do elemento a que se referem.
 - O texto da interface deixa claro que o app mostra o padrão informado e não verifica regras trabalhistas.
 - O link "Privacidade" é discreto, mas alcançável por teclado e leitor de tela, e abre o texto sobre privacidade sem sair da página e sem perder a escala.
+- O aviso de consentimento de métricas aparece uma vez, no rodapé da página, em texto claro, com duas ações de mesmo peso visual; ele não bloqueia o uso do app.
 
 **Requisitos de acessibilidade**
 
@@ -256,12 +258,12 @@ As métricas indicam tendências e proporções, não totais exatos, porque bloq
 ## Restrições técnicas de alto nível
 
 - **Sem backend e sem login:** todo o cálculo acontece no navegador, e o app deve funcionar em hospedagem estática (hoje, GitHub Pages, no subcaminho já publicado).
-- **Persistência:** a configuração da escala existe apenas no endereço da página; as únicas informações guardadas no aparelho são a preferência de tamanho de texto (RF51) e a recusa de métricas (RF64).
-- **Privacidade:** o único dado que sai do navegador por iniciativa do app são as métricas agregadas da funcionalidade 9, enviadas a um serviço externo sem cookies, sem identificação da pessoa, sem guardar o IP (RF63) e sem nenhuma parte do conteúdo do link, com opção de recusa (RF64); não há outros serviços de terceiros. O link carrega apenas a configuração da escala e, se preenchido, o nome; ele pode ficar no histórico de conversas e em pré-visualizações de link, o que a interface informa.
-- **LGPD:** a coleta se limita a dados agregados e não identificáveis, de modo a dispensar banner de consentimento; esse enquadramento deve ser confirmado antes do lançamento. A escolha do serviço de métricas fica para a Especificação Técnica e deve atender a esses critérios.
+- **Persistência:** a configuração da escala existe apenas no endereço da página; as informações guardadas no aparelho são a preferência de tamanho de texto (RF51), a escolha sobre métricas (RF64) e, somente após o consentimento, os cookies de medição do GA4.
+- **Privacidade:** o único dado que sai do navegador por iniciativa do app são as métricas da funcionalidade 9, enviadas ao Google Analytics 4 somente após o consentimento, sem nenhuma parte do conteúdo do link (RF58) e sem recursos de publicidade (RF59, RF63); não há outros serviços de terceiros. O link carrega apenas a configuração da escala e, se preenchido, o nome; ele pode ficar no histórico de conversas e em pré-visualizações de link, o que a interface informa.
+- **LGPD:** a base legal das métricas é o consentimento (art. 7º, I), coletado pelo aviso do RF64 e revogável a qualquer momento. O enquadramento do consentimento e a transferência internacional de dados para o Google (art. 33) devem ser confirmados com especialista antes do lançamento.
 - **Segurança:** o nome e os demais valores lidos do link são tratados como texto não confiável, exibidos sem interpretação e limitados em tamanho; um link manipulado não pode executar conteúdo nem quebrar a página.
 - **Compatibilidade:** versões atuais do Chrome no Android, do Safari no iOS e de Chrome, Edge, Firefox e Safari no computador. O compartilhamento nativo depende do suporte do navegador, com alternativa obrigatória (RF44 e RF45).
-- **Desempenho:** a página deve ficar utilizável em até 3 segundos num celular intermediário com conexão 4G, e o preview deve refletir cada alteração na entrada sem atraso perceptível (menos de 100 ms). O carregamento das métricas não pode atrasar nenhum desses tempos.
+- **Desempenho:** a página deve ficar utilizável em até 3 segundos num celular intermediário com conexão 4G, e o preview deve refletir cada alteração na entrada sem atraso perceptível (menos de 100 ms). O carregamento do GA4 só ocorre após o consentimento e não pode atrasar nenhum desses tempos.
 - **Datas:** os cálculos usam dias de calendário no fuso horário do aparelho, e a mudança de horário ou de fuso não pode deslocar os estados dos dias.
 - **Regulatório:** o produto não valida regras trabalhistas (Lei 10.101/2000, art. 6º; art. 386 da CLT; convenções coletivas e normas municipais), porque elas variam por categoria, gênero, convenção coletiva e município. A Emenda Constitucional 141/2026 (originada da PEC 221/2019), promulgada em 16/10/2026, acaba com a escala 6x1 como regra geral, com a primeira etapa (42 horas semanais e dois dias de repouso) prevista para meados de dezembro de 2026 e exceções por setor; as datas exatas e as exceções devem ser confirmadas no texto oficial. A modalidade 6x1 permanece na primeira versão para a transição e para os casos de exceção, e sua permanência deve ser revista à luz da emenda.
 
@@ -281,7 +283,7 @@ As métricas indicam tendências e proporções, não totais exatos, porque bloq
 - Mais de uma escala por pessoa na mesma tela, comparação de escalas ou escala de equipe.
 - Contas, login, sincronização entre aparelhos e salvamento da escala no aparelho.
 - Alternador de tema na página e idiomas além do português do Brasil.
-- Métricas com cookies, identificação de pessoa ou aparelho, gravação de sessão, mapas de calor ou coleta de qualquer parte da configuração da escala.
+- Métricas antes do consentimento, recursos de publicidade ou personalização do Google, identificador de pessoa próprio, gravação de sessão, mapas de calor ou coleta de qualquer parte da configuração da escala.
 - Painel de métricas dentro do app; as métricas são consultadas no próprio serviço de métricas.
 
 **Considerações futuras**

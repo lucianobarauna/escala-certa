@@ -15,9 +15,10 @@ escala-certa/
     ├── assets/             imagens, ícones e SVGs importados pelo código
     ├── components/         componentes reutilizáveis
     │   └── ui/             primitivos gerados pelo shadcn/ui
+    ├── domain/             regras de negócio puras, sem React (ex.: ciclos de escala)
     ├── hooks/              hooks compartilhados entre componentes ou telas
     ├── lib/                utilitários genéricos e de infraestrutura (ex.: `cn()`)
-    ├── services/           acesso ao backend
+    ├── services/           acesso ao backend e a serviços externos
     ├── types/              tipos compartilhados do domínio
     ├── views/              telas da aplicação
     ├── App.tsx             componente raiz
@@ -29,22 +30,24 @@ Sempre importe com o alias `@/` (ex.: `@/components/ShiftBadge/ShiftBadge`), nun
 
 ## Pastas do frontend
 
-| Pasta            | O que vai nela                                                             | Padrão de nome                               |
-| ---------------- | -------------------------------------------------------------------------- | -------------------------------------------- |
-| `components/`    | Componentes reutilizáveis, sem conhecer a tela em que são usados           | `components/<Nome>/<Nome>.tsx`               |
-| `components/ui/` | Primitivos do shadcn/ui, gerados pela CLI — prefira compor a editar        | `components/ui/<nome>.tsx` (arquivos soltos) |
-| `views/`         | Telas: montam componentes e hooks para formar uma página                   | `views/<Nome>View/<Nome>View.tsx`            |
-| `services/`      | Funções de acesso à API (`fetch`, URLs, tratamento de resposta), sem React | `services/<recurso>.service.ts`              |
-| `hooks/`         | Hooks usados por mais de um componente ou tela                             | `hooks/use<Nome>.ts`                         |
-| `types/`         | Tipos do domínio usados em mais de uma pasta (ex.: `Shift`, `Employee`)    | `types/<dominio>.ts`                         |
-| `assets/`        | Arquivos importados pelo código e processados pelo Vite                    | `assets/<nome>.<ext>`                        |
-| `lib/`           | Utilitários genéricos, sem regra de negócio                                | `lib/<nome>.ts`                              |
+| Pasta            | O que vai nela                                                          | Padrão de nome                               |
+| ---------------- | ----------------------------------------------------------------------- | -------------------------------------------- |
+| `components/`    | Componentes reutilizáveis, sem conhecer a tela em que são usados        | `components/<Nome>/<Nome>.tsx`               |
+| `components/ui/` | Primitivos do shadcn/ui, gerados pela CLI — prefira compor a editar     | `components/ui/<nome>.tsx` (arquivos soltos) |
+| `domain/`        | Regras de negócio puras, sem React, sem I/O e sem acesso a `window`     | `domain/<area>/<nome>.utils.ts`              |
+| `views/`         | Telas: montam componentes e hooks para formar uma página                | `views/<Nome>View/<Nome>View.tsx`            |
+| `services/`      | Acesso a API ou serviço externo (`fetch`, GA4, respostas), sem React    | `services/<recurso>.service.ts`              |
+| `hooks/`         | Hooks usados por mais de um componente ou tela                          | `hooks/use<Nome>.ts`                         |
+| `types/`         | Tipos do domínio usados em mais de uma pasta (ex.: `Shift`, `Employee`) | `types/<dominio>.ts`                         |
+| `assets/`        | Arquivos importados pelo código e processados pelo Vite                 | `assets/<nome>.<ext>`                        |
+| `lib/`           | Utilitários genéricos, sem regra de negócio                             | `lib/<nome>.ts`                              |
 
 ## Onde colocar cada coisa
 
 - **Usado só por um componente ou tela?** Fica na pasta dele. Hooks, tipos, constantes e funções puras locais ficam ao lado do componente (`useShiftFilters.ts`, `shift-table.types.ts`, `shift-table.utils.ts`).
 - **Usado em mais de um lugar?** Sobe para a pasta compartilhada: `hooks/`, `types/` ou `lib/`.
-- **Fala com o backend?** Vai para `services/`.
+- **É regra de negócio pura (cálculo, validação, codificação)?** Vai para `domain/<area>/`, com funções puras e testes ao lado. Utilitário genérico, sem regra de negócio, fica em `lib/`.
+- **Fala com o backend ou com um serviço externo?** Vai para `services/`.
 - **É uma página inteira?** Vai para `views/`. Se um pedaço da tela puder ser reaproveitado, extraia para `components/`.
 
 ```
