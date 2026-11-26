@@ -3,7 +3,7 @@ name: escala-certa
 created: 2026-10-29
 updated: 2026-11-26
 status: active
-revisions: 4
+revisions: 6
 ---
 
 # Brainstorm: Escala Certa — preview visual de escalas de trabalho que se repetem
@@ -17,7 +17,7 @@ Quem trabalha em escala que se repete tem dificuldade de visualizar como ela cai
 
 Hoje a resposta vem de perguntar a uma IA, que devolve listas de datas em texto — lentas de ler e difíceis de cruzar com feriados, fins de semana e compromissos. O público é quem consulta a própria escala com frequência para responder perguntas como "trabalho no Natal?" ou "consigo marcar algo no dia 15?".
 
-Na escala semanal, um ciclo de 5x2 ou 6x1 sempre cai nos mesmos dias da semana; o que varia entre empresas é o rodízio de folgas ao longo de algumas semanas. As regras legais do domingo (Lei 10.101/2000, art. 6º: ao menos um domingo a cada três semanas no comércio; art. 386 da CLT: domingo quinzenal para mulheres, conforme jurisprudência; além de convenções coletivas e normas municipais) variam e não determinam onde caem as demais folgas — o padrão real é definido por cada empregador.
+Na escala semanal, um ciclo de 5x2 ou 6x1 sempre cai nos mesmos dias da semana; o que varia entre empresas é o rodízio de folgas ao longo de algumas semanas. As regras legais do domingo (Lei 10.101/2000, art. 6º: ao menos um domingo a cada três semanas no comércio; art. 386 da CLT: domingo quinzenal para mulheres, conforme jurisprudência; além de convenções coletivas e normas municipais) variam e não determinam onde caem as demais folgas — o padrão real é definido por cada empregador. A Emenda Constitucional 141/2026 (originada da PEC 221/2019), promulgada em 16/10/2026, acaba com a escala 6x1 como regra geral a partir de meados de dezembro de 2026, com exceções por setor; a 6x1 continua existindo durante a transição e nessas exceções.
 
 O valor está em olhar para frente no tempo de forma visual; o cálculo em si é simples. O projeto é um app web de página única, partindo de um scaffold vazio.
 
@@ -26,6 +26,7 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 ### Hard Constraints
 
 - Sem backend e sem login: todo o cálculo acontece no navegador, compatível com hospedagem estática.
+- Métricas de uso apenas agregadas, por um serviço externo sem cookies, sem identificar a pessoa ou o aparelho, sem guardar o IP e sem receber nenhuma parte do conteúdo do link, com opção de recusa na própria página.
 - Acessível: navegação completa por teclado, compatível com leitor de tela, estados que não dependem só de cor e contraste mínimo WCAG AA.
 - Acessível para baixa visão: a interface respeita o tamanho de fonte configurado no navegador ou no sistema e continua utilizável com texto ampliado até 200% e zoom até 400%, sem cortar ou sobrepor conteúdo e sem rolagem horizontal. Os indicadores de estado e o foco visível têm contraste mínimo de 3:1 com o fundo.
 - Somente escalas que se repetem na primeira versão: plantão (12x36 diurno e noturno, 24x48, 24x72) e escala semanal (5x2 e 6x1) com padrão de folgas de 1 a 7 semanas.
@@ -35,7 +36,7 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 ### Soft Constraints
 
 - Pensado primeiro para celular.
-- Nada é salvo no dispositivo; a única forma de "lembrar" a escala é o próprio link.
+- Nada da escala é salvo no dispositivo; a única forma de "lembrar" a escala é o próprio link. As exceções são a preferência de tamanho de texto, que é ajuste de leitura, e a recusa de métricas, que é escolha de privacidade; nenhuma delas é dado da escala.
 - Marcação por dia, sem horários dos turnos.
 
 ## Success Criteria
@@ -61,6 +62,12 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 - **Pergunta direta "Trabalho no dia \___?" como interface principal** — rejected como núcleo: perde a visão geral do mês; adiada como extensão.
 - **Compartilhar apenas copiando o endereço da barra do navegador** — rejected: depende de a pessoa saber que o link guarda a escala e é pouco prático no celular; quem recebe não sabe de quem é a escala.
 - **Exportar a escala para a agenda do celular (.ics)** — rejected por agora: elimina a experiência visual que é o centro do produto; boa extensão futura.
+- **Saída do plantão como estado separado da folga** — rejected: no 12x36 noturno o resumo mostraria zero folgas, e no 24x48 "quantas folgas tenho?" ficaria ambíguo; quem trabalha nessas escalas conta o dia de saída como folga.
+- **Rótulo "Em casa" para a folga** — rejected: "folga" é o termo usado pelo público nas escalas de plantão e na escala semanal.
+- **Diferenciar o dia de plantão noturno ("livre durante o dia")** — rejected por agora: exige modelar horários, fora do escopo; possível extensão quando houver horários.
+- **Sem métricas de uso, só testes de usabilidade** — rejected: os testes validam a interface, mas não mostram se o produto é usado nem quais escalas importam, o que deixaria decisões como manter a 6x1 sem dados.
+- **Analytics com cookies ou identificação da pessoa** — rejected: exige banner de consentimento, que piora a experiência no celular e costuma ser barreira de acessibilidade, e contraria a proposta de privacidade.
+- **Analytics próprio hospedado** — rejected: exige servidor, contrariando a restrição de não ter backend.
 
 ## Decision
 
@@ -76,14 +83,16 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 - O preview fica visível junto da entrada e se atualiza a cada marcação, para a pessoa conferir o resultado com a escala que recebe da empresa.
 - Preview: calendário mensal com legenda visível e os estados aplicáveis à escala:
   - **Trabalha** — dia de trabalho; no plantão, dia em que o plantão começa.
-  - **Saída do plantão** — dia em que o plantão termina, pela manhã. Existe nas escalas de 24h e no 12x36 noturno; não existe no 12x36 diurno nem na escala semanal.
-  - **Em casa** — folga.
+  - **Folga (saída do plantão)** — tipo de folga: dia em que o plantão termina, pela manhã, e o descanso começa. Existe nas escalas de 24h e no 12x36 noturno, onde todas as folgas são desse tipo; não existe no 12x36 diurno nem na escala semanal.
+  - **Folga** — dia inteiro de folga.
+- Os dois tipos de folga são reconhecíveis como folga e distinguíveis entre si; a legenda explica que, na folga de saída, a pessoa sai do plantão pela manhã.
 - Cada estado tem cor, ícone ou texto, e cada dia tem um nome acessível completo (ex.: "15 de novembro, trabalha").
 - Navegação entre meses por botões de mês anterior e próximo mês; sem depender de gesto de deslizar.
 - Controle de tamanho do texto visível na própria página (diminuir, restaurar padrão e aumentar), com rótulos acessíveis e o tamanho atual anunciado, para quem não sabe ou não consegue usar o zoom do navegador ou do sistema. Ele soma ao tamanho de fonte configurado pelo usuário, sem substituí-lo.
 - Com fonte ampliada, o calendário se reorganiza em vez de encolher o texto: as células crescem junto com a fonte e, quando a grade de 7 colunas não couber na largura da tela, o mês passa a ser exibido como lista de dias, mantendo os mesmos estados, ícones e legenda. A marcação das folgas do padrão semanal segue o mesmo princípio.
-- Abaixo do calendário, um resumo do mês exibido (ex.: "Novembro: 22 dias trabalhando, 8 dias em casa"), anunciado a leitores de tela quando o mês ou a escala mudam.
+- Abaixo do calendário, um resumo do mês exibido com o total de dias de trabalho e de folga, em que as folgas de saída do plantão entram no total e aparecem entre parênteses (ex.: "Dezembro de 2026: 11 dias de plantão, 20 dias de folga (10 com saída do plantão pela manhã)"), anunciado a leitores de tela quando o mês ou a escala mudam.
 - Toda a configuração da escala fica refletida no endereço da página; abrir o link restaura o preview.
+- Métricas agregadas de acessos e de poucos eventos (tipo de escala, quantidade de semanas, compartilhamento e uso do controle de texto), sem nada do conteúdo do link, com um link "Privacidade" que explica o que é medido e oferece a opção "Não registrar minhas visitas neste aparelho".
 - Nome opcional da escala (ex.: "Escala da Ana"), exibido no topo do preview e incluído no link, para identificar de quem é a escala ao reabrir ou ao receber de outra pessoa. Junto ao campo, um aviso visível informa que o nome vai no link.
 - Ação **Compartilhar escala**: no celular, abre o menu de compartilhamento nativo do sistema; onde ele não existe, copia o link. A confirmação ("Link copiado") é exibida e anunciada a leitores de tela. Quem recebe o link vê a mesma tela, com o mesmo preview, e pode ajustar a configuração sem afetar o link original.
 
@@ -94,7 +103,10 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 - O app não alerta quando o padrão informado contraria regras do domingo — aceitável porque essas regras variam por categoria, gênero, convenção coletiva e município, e validar errado seria pior que não validar.
 - Nomes acessíveis por dia, resumo do mês e estado no link são lógica adicional a testar — aceitável porque sustentam diretamente os critérios de sucesso.
 - Suportar fonte ampliada exige uma forma alternativa de exibir o mês (lista de dias) quando a grade não cabe — aceitável porque uma grade de 7 colunas com texto a 200% num celular corta ou sobrepõe conteúdo.
-- O dia de "saída do plantão" é tratado como um dia inteiro, embora a pessoa chegue em casa pela manhã — aceitável enquanto o produto não modela horários.
+- O dia de saída do plantão é tratado como um dia inteiro de folga, embora a pessoa só fique livre a partir da manhã — aceitável enquanto o produto não modela horários; o rótulo "Folga (saída do plantão)" e a legenda deixam isso explícito.
+- O resumo soma as folgas de saída ao total de folgas — aceitável porque é assim que o público conta as folgas; a quantidade de folgas de saída continua visível entre parênteses.
+- A modalidade 6x1 continua na primeira versão apesar da EC 141/2026 — aceitável porque ela segue valendo na transição e nos setores de exceção, e o custo é baixo: usa o mesmo modelo de padrão semanal do 5x2.
+- As métricas dependem de um serviço externo e de um script de terceiros, e bloqueadores de conteúdo fazem os números ficarem abaixo do real — aceitável porque servem para tendências e proporções, e o app funciona normalmente se o serviço falhar.
 - O nome da escala, quando preenchido, viaja no link e pode ficar no histórico de conversas e em pré-visualizações de link — aceitável porque o campo é opcional, não exige nome real e a interface avisa disso; o link não carrega nenhum outro dado pessoal.
 - Quem recebe escala mensal sem padrão, ou só conhece as folgas da semana atual, não é atendido — aceitável porque nenhum modelo de repetição cobre esse caso sem remarcação mensal.
 
@@ -103,15 +115,30 @@ O valor está em olhar para frente no tempo de forma visual; o cálculo em si é
 ## Open Questions
 
 - [ ] A definir: Como lidar com trocas de plantão, férias e mudanças de escala que quebram o ciclo? Por ora, a saída é informar uma nova referência.
-- [ ] A definir: A âncora do padrão semanal é mais natural como "a semana 1 começa em [data]" ou como "esta semana é a semana \_\_ do padrão"?
+- [x] Resolvido: a âncora do padrão semanal é a data de início da semana 1 (a semana de domingo a sábado que contém essa data).
 - [ ] A definir: Oferecer um atalho de preenchimento para o rodízio em que a folga avança um dia por semana, se esse formato se mostrar comum?
 - [ ] A definir: Atender escalas mensais sem padrão, montadas à mão pela empresa?
 - [ ] A definir: Quando incluir a pergunta direta "Trabalho no dia ___?" para datas distantes.
 - [ ] A definir: Vale exportar a escala para a agenda do celular (.ics) numa versão futura?
-- [ ] A definir: Destacar feriados nacionais no preview?
-- [ ] A definir: O tamanho de texto escolhido no controle deve ser lembrado entre visitas? Recomendação: sim, como preferência do dispositivo — é ajuste de leitura, não dado da escala, e obrigar quem tem baixa visão a reajustar a cada visita é uma barreira.
+- [x] Resolvido: feriados ficam fora da primeira versão, como consideração futura.
+- [x] Resolvido: o tamanho de texto escolhido é lembrado entre visitas como preferência local do dispositivo — é ajuste de leitura, não dado da escala, e é a única informação guardada no dispositivo.
+- [ ] A definir: Manter a modalidade 6x1 depois da transição da EC 141/2026? Revisar quando as exceções por setor estiverem confirmadas no texto oficial.
 
 ## Revision History
+
+### 2026-11-26 — Refinement
+
+**From:** Nenhuma métrica de uso; objetivos verificados só em testes de usabilidade e auditorias de acessibilidade.
+**To:** Métricas agregadas de acessos e de poucos eventos de produto, por um serviço externo sem cookies, sem identificação, sem guardar o IP e sem nada do conteúdo do link, com um texto de privacidade na página e opção de recusa.
+**Trigger:** Pedido para ter analytics de acesso; sem dados de uso não há como saber se o produto é usado nem quais escalas importam, incluindo a decisão sobre a 6x1 após a EC 141/2026.
+**Trade-offs reassessed:** A promessa de que nenhum dado sai do navegador passa a ter uma exceção estreita e explícita. O link continua sendo o único lugar da escala. Os números são aproximados por causa de bloqueadores. O enquadramento na LGPD deve ser confirmado antes do lançamento.
+
+### 2026-11-26 — Refinement
+
+**From:** Estados "Trabalha", "Saída do plantão" e "Em casa", com o resumo contando cada estado separadamente.
+**To:** Estados "Trabalha", "Folga" e "Folga (saída do plantão)", em que a saída é um tipo de folga e o resumo mostra um único total de folgas. Contexto atualizado com a EC 141/2026.
+**Trigger:** Ao redigir o PRD, ficou claro que no 12x36 noturno o resumo mostraria zero folgas. Pesquisa indicou que "folga" é o termo do público e que o dia de saída é tratado como o primeiro dia de folga. A mesma pesquisa revelou a promulgação da EC 141/2026.
+**Trade-offs reassessed:** O resumo agrega dois estados, com a quantidade de folgas de saída entre parênteses. A diferenciação do dia de plantão noturno fica para quando houver horários. A 6x1 permanece na primeira versão, com revisão prevista. O vocabulário deve ser validado nos testes de usabilidade.
 
 ### 2026-11-26 — Pivot
 
