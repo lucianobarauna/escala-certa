@@ -23,10 +23,10 @@ Monta o modelo do mês exibido (`MonthModel`), o nome acessível completo de cad
 
 ## Subtarefas
 
-- [ ] 2.1 Implementar `month.utils.ts` (`buildMonth`, `shiftMonth`, `leadingBlanks`, `isToday`) + spec.
-- [ ] 2.2 Implementar `day-name.utils.ts` + spec.
-- [ ] 2.3 Implementar `summary.utils.ts` (`summarizeMonth`, contagens) + spec.
-- [ ] 2.4 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
+- [x] 2.1 Implementar `month.utils.ts` (`buildMonth`, `shiftMonth`, `leadingBlanks`, `isToday`) + spec.
+- [x] 2.2 Implementar `day-name.utils.ts` + spec.
+- [x] 2.3 Implementar `summary.utils.ts` (`summarizeMonth`, contagens) + spec.
+- [x] 2.4 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
 
 ## Detalhes de implementação
 
@@ -44,38 +44,38 @@ Ver `techspec.md`: "Principais interfaces" (`buildMonth`, `summarizeMonth`), "No
 
 `month.utils.spec.ts`
 
-- [ ] 42. Meses de 28, 29, 30 e 31 dias (fev/2027, fev/2028, nov, dez).
-- [ ] 43. `leadingBlanks` correto para meses que começam em cada dia da semana.
-- [ ] 44. `isToday` verdadeiro só no dia de hoje e só no mês de hoje.
-- [ ] 45. `shiftMonth` avança/volta atravessando dezembro↔janeiro, sem limite (RF28).
-- [ ] 46. Mês de uma escala incompleta tem `state: null` em todos os dias.
+- [x] 42. Meses de 28, 29, 30 e 31 dias (fev/2027, fev/2028, nov, dez).
+- [x] 43. `leadingBlanks` correto para meses que começam em cada dia da semana.
+- [x] 44. `isToday` verdadeiro só no dia de hoje e só no mês de hoje.
+- [x] 45. `shiftMonth` avança/volta atravessando dezembro↔janeiro, sem limite (RF28).
+- [x] 46. Mês de uma escala incompleta tem `state: null` em todos os dias.
 
 `day-name.utils.spec.ts`
 
-- [ ] 47. "15 de novembro de 2026, domingo, trabalha".
-- [ ] 48. "26 de novembro de 2026, quinta-feira, hoje, folga".
-- [ ] 49. "2 de novembro de 2026, segunda-feira, folga, saída do plantão pela manhã".
-- [ ] 50. Combinação "hoje" + saída do plantão.
-- [ ] 51. Escala incompleta: nome sem estado.
-- [ ] 52. Dia 1º usa "1" e não "1º".
+- [x] 47. "15 de novembro de 2026, domingo, trabalha".
+- [x] 48. "26 de novembro de 2026, quinta-feira, hoje, folga".
+- [x] 49. "2 de novembro de 2026, segunda-feira, folga, saída do plantão pela manhã".
+- [x] 50. Combinação "hoje" + saída do plantão.
+- [x] 51. Escala incompleta: nome sem estado.
+- [x] 52. Dia 1º usa "1" e não "1º".
 
 `summary.utils.spec.ts`
 
-- [ ] 53. Semanal: "Novembro de 2026: 21 dias trabalhando, 9 dias de folga".
-- [ ] 54. 24x48: "Dezembro de 2026: 11 dias de plantão, 20 dias de folga (10 com saída do plantão pela manhã)".
-- [ ] 55. 12x36 noturno: "(todos com saída do plantão pela manhã)".
-- [ ] 56. 12x36 diurno: sem parênteses.
-- [ ] 57. Singular ("1 dia de folga") e zero.
-- [ ] 58. Contagens do resumo = contagens da grade.
-- [ ] 59. Escala incompleta devolve a orientação do RF03.
+- [x] 53. Semanal: "Novembro de 2026: 21 dias trabalhando, 9 dias de folga".
+- [x] 54. 24x48: "Dezembro de 2026: 11 dias de plantão, 20 dias de folga (10 com saída do plantão pela manhã)".
+- [x] 55. 12x36 noturno: "(todos com saída do plantão pela manhã)".
+- [x] 56. 12x36 diurno: sem parênteses.
+- [x] 57. Singular ("1 dia de folga") e zero.
+- [x] 58. Contagens do resumo = contagens da grade.
+- [x] 59. Escala incompleta devolve a orientação do RF03.
 
 ### Testes de integração
 
-- [ ] Sem testes próprios: `MonthPreview` e `MonthSummary` consomem estes módulos na tarefa 7.0 (integração 6–8).
+- [x] Sem testes próprios: `MonthPreview` e `MonthSummary` consomem estes módulos na tarefa 7.0 (integração 6–8).
 
 ### Testes E2E (se aplicável)
 
-- [ ] Não se aplica (cobertos na tarefa 10.0, `month-navigation.spec.ts`).
+- [x] Não se aplica (cobertos na tarefa 10.0, `month-navigation.spec.ts`).
 
 ## Arquivos relevantes
 

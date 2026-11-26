@@ -228,6 +228,43 @@ VITE_API_KEY=sk_live_9f8a7b6c5d4e
 - Renderize com o `render` do `vitest-browser-react`.
 - Faça queries por papel acessível ou texto (`getByRole`, `getByText`) em vez de test IDs ou seletores CSS.
 
+## Commits
+
+As mensagens de commit seguem o [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/).
+
+```
+<tipo>[escopo opcional][!]: <descrição>
+
+[corpo opcional]
+
+[rodapé(s) opcional(is)]
+```
+
+- **Tipo obrigatório**, em minúsculas:
+  - `feat`: nova funcionalidade (MINOR no SemVer).
+  - `fix`: correção de bug (PATCH no SemVer).
+  - `docs`, `style` (só formatação), `refactor`, `perf`, `test`, `build`, `ci`, `chore` e `revert`: demais mudanças.
+- **Escopo opcional**: substantivo entre parênteses que indica a área afetada (ex.: `feat(domain):`, `fix(share-link):`, `docs(tasks):`).
+- **Descrição obrigatória**: logo após `: `, curta (até ~72 caracteres), no imperativo, em minúsculas e sem ponto final, em inglês como no histórico do repositório.
+- **Corpo opcional**: separado por uma linha em branco; explica o _porquê_ da mudança, não o _como_.
+- **Mudança incompatível (_breaking change_)**: `!` antes dos `:` (ex.: `feat(url)!: change the schedule link format`) e/ou rodapé `BREAKING CHANGE: <descrição>` (MAJOR no SemVer).
+- **Rodapés**: `Token: valor` ou `Token #valor`, com `-` no lugar de espaços nos tokens (ex.: `Refs: #12`). As linhas de atribuição pedidas pela ferramenta (`Co-Authored-By`, `Claude-Session`) entram como rodapés, no fim.
+- Um commit por mudança lógica: não misture `feat`, `fix` e `docs` no mesmo commit.
+
+```
+// ❌ Evite
+Updated stuff.
+feat: Add Schedule Domain.
+fixed bug
+
+// ✅ Prefira
+feat(domain): add schedule cycle domain with tests
+fix(share-link): fall back to clipboard when share is rejected
+docs(tasks): mark task 1.0 as completed
+```
+
+Essas regras dependem de revisão: não há `commitlint` configurado.
+
 ## Formatação e Lint
 
 - Não formate manualmente — rode `pnpm format` (o oxfmt cuida de aspas, ponto e vírgula, ordem dos imports e ordem das classes do Tailwind).

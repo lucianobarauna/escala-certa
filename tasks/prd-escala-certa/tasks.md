@@ -5,7 +5,7 @@ Ordem de construção de baixo para cima na pirâmide de testes (domínio → se
 ## Tarefas
 
 - [x] 1.0 Fundação e domínio de ciclos
-- [ ] 2.0 Mês, nome acessível e resumo
+- [x] 2.0 Mês, nome acessível e resumo
 - [ ] 3.0 Codec da URL versionada
 - [ ] 4.0 Infra e serviços (storage, compartilhamento, analytics, consentimento)
 - [ ] 5.0 Hooks de estado
