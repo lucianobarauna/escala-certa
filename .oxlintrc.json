@@ -91,6 +91,12 @@
         "max-lines-per-function": "off",
         "no-magic-numbers": "off"
       }
+    },
+    {
+      "files": ["src/vite-env.d.ts"],
+      "rules": {
+        "typescript/consistent-type-definitions": "off"
+      }
     }
   ],
   "env": {
