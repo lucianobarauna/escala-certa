@@ -21,7 +21,7 @@ export function TextSizeButton({ label, blockedReasonId, onPress, children }: Te
       onClick={onPress}
       className={cn(
         buttonVariants({ variant: 'outline', size: 'lg' }),
-        'min-w-11',
+        'h-auto min-h-11 min-w-11 whitespace-normal',
         isBlocked && 'cursor-not-allowed opacity-50',
       )}
     >

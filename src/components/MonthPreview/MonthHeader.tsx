@@ -24,7 +24,11 @@ export function MonthHeader({ label, headingId, navigation }: MonthHeaderProps) 
         {label}
       </h2>
       {!navigation.isCurrentMonth && (
-        <Button variant="ghost" className="h-11" onPress={goToCurrentMonth}>
+        <Button
+          variant="ghost"
+          className="h-auto min-h-11 whitespace-normal"
+          onPress={goToCurrentMonth}
+        >
           {CURRENT_MONTH_LABEL}
         </Button>
       )}

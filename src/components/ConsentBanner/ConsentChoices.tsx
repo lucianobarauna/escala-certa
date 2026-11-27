@@ -7,7 +7,7 @@ type ConsentChoicesProps = {
   onRefuse: () => void;
 };
 
-const CHOICE_BUTTON_CLASS = 'h-11 flex-1 px-4 sm:flex-none';
+const CHOICE_BUTTON_CLASS = 'h-auto min-h-11 flex-1 px-4 py-2 whitespace-normal sm:flex-none';
 
 export function ConsentChoices({ onAccept, onRefuse }: ConsentChoicesProps) {
   return (

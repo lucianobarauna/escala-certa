@@ -1,13 +1,14 @@
-import { Button } from '@/components/ui/button';
+import { I18nProvider } from 'react-aria-components';
 
-import HelloWorld from './components/HelloWorld/HelloWorld';
+import { HomeView } from '@/views/HomeView/HomeView';
+
+const APP_LOCALE = 'pt-BR';
 
 function App() {
   return (
-    <>
-      <HelloWorld name="Vitest" />
-      <Button>Click me</Button>
-    </>
+    <I18nProvider locale={APP_LOCALE}>
+      <HomeView />
+    </I18nProvider>
   );
 }
 

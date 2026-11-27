@@ -19,7 +19,7 @@ export function ShareButton({ name, isComplete }: ShareButtonProps) {
     <div className="flex flex-col items-start gap-2">
       <Button
         size="lg"
-        className="h-11 px-4"
+        className="h-auto min-h-11 px-4 py-2 whitespace-normal"
         isDisabled={!isComplete}
         aria-describedby={isComplete ? undefined : reasonId}
         onPress={share}

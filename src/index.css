@@ -8,6 +8,7 @@
 
 @theme {
   --container-month-grid: 40rem;
+  --container-home-columns: 69rem;
 }
 
 @theme inline {
