@@ -1,9 +1,20 @@
 import { playwright } from '@vitest/browser-playwright';
 import { configDefaults, defineConfig, mergeConfig } from 'vitest/config';
+import type { BrowserCommand } from 'vitest/node';
 
 import viteConfig from './vite.config';
 
 const MIN_COVERAGE_PERCENT = 80;
+
+type ColorScheme = 'light' | 'dark';
+
+async function emulateColorScheme(
+  context: Parameters<BrowserCommand<[scheme: ColorScheme]>>[0],
+  scheme: ColorScheme,
+) {
+  if (context.provider.name !== 'playwright') throw new Error('Requer o provider playwright');
+  await context.page.emulateMedia({ colorScheme: scheme });
+}
 
 export default mergeConfig(
   viteConfig,
@@ -15,6 +26,7 @@ export default mergeConfig(
         headless: true,
         provider: playwright(),
         instances: [{ browser: 'chromium' }],
+        commands: { emulateColorScheme },
       },
       coverage: {
         provider: 'v8',
