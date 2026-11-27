@@ -15,7 +15,7 @@ export function HomeView() {
       <AppHeader />
       <main className="@container flex flex-col gap-6">
         <ConfigNotice issues={config.issues} />
-        <div className="grid gap-10 @home-columns:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] @home-columns:items-start">
+        <div className="grid grid-cols-1 gap-10 @home-columns:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] @home-columns:items-start">
           <ScheduleInput draft={config.draft} onChange={config.updateDraft} />
           <SchedulePreview draft={config.draft} navigation={navigation} isComplete={isComplete} />
         </div>
