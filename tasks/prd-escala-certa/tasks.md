@@ -12,7 +12,7 @@ Ordem de construção de baixo para cima na pirâmide de testes (domínio → se
 - [x] 6.0 Formulários de entrada
 - [x] 7.0 Preview do mês
 - [x] 8.0 Compartilhar, tamanho de texto, aviso, privacidade e consentimento
-- [ ] 9.0 HomeView e App
+- [x] 9.0 HomeView e App
 - [ ] 10.0 E2E, acessibilidade e desempenho
 - [ ] 11.0 Lançamento (GA4, LGPD e merge na main)
 

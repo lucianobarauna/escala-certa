@@ -24,10 +24,10 @@ Compõe a página: entrada, preview, resumo, compartilhar, tamanho de texto, pri
 
 ## Subtarefas
 
-- [ ] 9.1 Implementar `HomeView.tsx` (e subcomponentes locais se necessário para o limite de 100 linhas).
-- [ ] 9.2 Atualizar `App.tsx` (`I18nProvider` pt-BR + `HomeView`) e remover `src/components/HelloWorld/` e o spec do placeholder.
-- [ ] 9.3 Escrever os testes de integração do `HomeView` (um arquivo por grupo, cada um montando a própria URL em `beforeEach`).
-- [ ] 9.4 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
+- [x] 9.1 Implementar `HomeView.tsx` (e subcomponentes locais se necessário para o limite de 100 linhas).
+- [x] 9.2 Atualizar `App.tsx` (`I18nProvider` pt-BR + `HomeView`) e remover `src/components/HelloWorld/` e o spec do placeholder.
+- [x] 9.3 Escrever os testes de integração do `HomeView` (um arquivo por grupo, cada um montando a própria URL em `beforeEach`).
+- [x] 9.4 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
 
 ## Detalhes de implementação
 
@@ -43,28 +43,28 @@ Ver `techspec.md`: "Fluxo de dados", "Principais decisões" (estado na query str
 
 ### Testes unitários
 
-- [ ] Funções puras locais do `HomeView` (se criadas) com spec ao lado.
+- [x] Funções puras locais do `HomeView` (se criadas) com spec ao lado.
 
 ### Testes de integração
 
-- [ ] 14. Fluxo plantão: escolher tipo → data → 12x36 → turno → preview preenchido, legenda e resumo corretos para o mês atual (relógio fixo em 26/11/2026).
-- [ ] 15. Fluxo semanal em rodízio: modalidade → semanas → folgas → âncora; o preview muda a cada folga marcada (US7, RF30).
-- [ ] 16. A URL é atualizada a cada alteração com `replaceState` e `history.length` não cresce (RF38); o botão "voltar" não percorre marcações.
-- [ ] 17. Abrir com URL válida restaura formulário e preview idênticos (RF36), sem nenhum preenchimento adicional.
-- [ ] 18. Abrir com URL inválida/versão desconhecida mostra aviso, formulário utilizável e aproveita campos válidos (RF37, US18).
-- [ ] 19. Reancoragem: alterar a data de referência recalcula o preview e a URL (US20).
-- [ ] 20. Receber link: ajustar a configuração não altera o link original (RF47).
-- [ ] 21. Nome aparece no topo do preview e no `document.title`; sem nome, título padrão (RF42).
-- [ ] 22. Navegação de meses sem limite, voltar ao mês atual (US8).
-- [ ] 23. Métricas: com consentimento, completar a escala dispara um único `schedule_completed`; mudar marcações não repete; mudar modalidade repete (RF57); aceitar o consentimento depois de completar envia o evento pendente; recusar nada envia.
-- [ ] 24. Nenhum payload de analytics contém nome, datas ou query (RF58).
-- [ ] 25. Com o GA4 bloqueado (script falha), a tela funciona sem erro no console (RF61).
-- [ ] 26. Texto a 200% muda o preview para lista e não há rolagem horizontal.
-- [ ] 27. Tema escuro e claro renderizam (`prefers-color-scheme` emulado) sem perder estados.
+- [x] 14. Fluxo plantão: escolher tipo → data → 12x36 → turno → preview preenchido, legenda e resumo corretos para o mês atual (relógio fixo em 26/11/2026).
+- [x] 15. Fluxo semanal em rodízio: modalidade → semanas → folgas → âncora; o preview muda a cada folga marcada (US7, RF30).
+- [x] 16. A URL é atualizada a cada alteração com `replaceState` e `history.length` não cresce (RF38); o botão "voltar" não percorre marcações.
+- [x] 17. Abrir com URL válida restaura formulário e preview idênticos (RF36), sem nenhum preenchimento adicional.
+- [x] 18. Abrir com URL inválida/versão desconhecida mostra aviso, formulário utilizável e aproveita campos válidos (RF37, US18).
+- [x] 19. Reancoragem: alterar a data de referência recalcula o preview e a URL (US20).
+- [x] 20. Receber link: ajustar a configuração não altera o link original (RF47).
+- [x] 21. Nome aparece no topo do preview e no `document.title`; sem nome, título padrão (RF42).
+- [x] 22. Navegação de meses sem limite, voltar ao mês atual (US8).
+- [x] 23. Métricas: com consentimento, completar a escala dispara um único `schedule_completed`; mudar marcações não repete; mudar modalidade repete (RF57); aceitar o consentimento depois de completar envia o evento pendente; recusar nada envia.
+- [x] 24. Nenhum payload de analytics contém nome, datas ou query (RF58).
+- [x] 25. Com o GA4 bloqueado (script falha), a tela funciona sem erro no console (RF61).
+- [x] 26. Texto a 200% muda o preview para lista e não há rolagem horizontal.
+- [x] 27. Tema escuro e claro renderizam (`prefers-color-scheme` emulado) sem perder estados.
 
 ### Testes E2E (se aplicável)
 
-- [ ] Cobertos na tarefa 10.0.
+- [x] Cobertos na tarefa 10.0.
 
 ## Arquivos relevantes
 
