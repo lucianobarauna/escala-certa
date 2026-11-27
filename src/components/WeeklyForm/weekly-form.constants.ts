@@ -15,13 +15,3 @@ export const MODALITY_OPTIONS: readonly ModalityOption[] = [
   { value: '5x2', label: '5x2', description: 'Trabalha 5 dias e folga 2 por semana' },
   { value: '6x1', label: '6x1', description: 'Trabalha 6 dias e folga 1 por semana' },
 ];
-
-export const WEEKDAYS = [
-  { short: 'Dom', full: 'Domingo' },
-  { short: 'Seg', full: 'Segunda-feira' },
-  { short: 'Ter', full: 'Terça-feira' },
-  { short: 'Qua', full: 'Quarta-feira' },
-  { short: 'Qui', full: 'Quinta-feira' },
-  { short: 'Sex', full: 'Sexta-feira' },
-  { short: 'Sáb', full: 'Sábado' },
-] as const;

@@ -6,7 +6,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --container-month-grid: 40rem;
+}
+
 @theme inline {
+  --color-state-work: var(--state-work);
+  --color-state-work-icon: var(--state-work-icon);
+  --color-state-off: var(--state-off);
+  --color-state-off-icon: var(--state-off-icon);
+  --color-state-off-exit: var(--state-off-exit);
+  --color-state-off-exit-icon: var(--state-off-exit-icon);
   --font-heading: var(--font-sans);
   --font-sans: 'Inter Variable', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
@@ -82,6 +92,12 @@
   --sidebar-accent-foreground: oklch(0.218 0.008 223.9);
   --sidebar-border: oklch(0.925 0.005 214.3);
   --sidebar-ring: oklch(0.723 0.014 214.4);
+  --state-work: oklch(0.955 0.025 255);
+  --state-work-icon: oklch(0.47 0.15 260);
+  --state-off: oklch(0.955 0.04 165);
+  --state-off-icon: oklch(0.46 0.1 165);
+  --state-off-exit: oklch(0.96 0.045 85);
+  --state-off-exit-icon: oklch(0.5 0.12 60);
 }
 
 .dark {
@@ -116,6 +132,12 @@
   --sidebar-accent-foreground: oklch(0.987 0.002 197.1);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.56 0.021 213.5);
+  --state-work: oklch(0.29 0.05 255);
+  --state-work-icon: oklch(0.82 0.1 255);
+  --state-off: oklch(0.29 0.05 165);
+  --state-off-icon: oklch(0.82 0.12 165);
+  --state-off-exit: oklch(0.3 0.05 75);
+  --state-off-exit-icon: oklch(0.85 0.12 80);
 }
 
 @layer base {

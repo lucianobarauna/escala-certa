@@ -39,3 +39,13 @@ export const TEXT_SIZE_STEP = 25;
 
 export const MAX_QUERY_LENGTH = 2000;
 export const URL_VERSION = '1';
+
+export const WEEKDAYS = [
+  { short: 'Dom', full: 'Domingo' },
+  { short: 'Seg', full: 'Segunda-feira' },
+  { short: 'Ter', full: 'Terça-feira' },
+  { short: 'Qua', full: 'Quarta-feira' },
+  { short: 'Qui', full: 'Quinta-feira' },
+  { short: 'Sex', full: 'Sexta-feira' },
+  { short: 'Sáb', full: 'Sábado' },
+] as const;

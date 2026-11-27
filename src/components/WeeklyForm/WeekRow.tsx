@@ -1,8 +1,8 @@
 import { isOffDayLimitReached } from '@/domain/schedule/off-days.utils';
+import { WEEKDAYS } from '@/domain/schedule/schedule.constants';
 import type { WeeklyDraft } from '@/types/schedule';
 
 import { DayToggle } from './DayToggle';
-import { WEEKDAYS } from './weekly-form.constants';
 import { getWeekLabel, getWeekStatus } from './weekly-form.utils';
 import { WeekStatusText } from './WeekStatusText';
 
