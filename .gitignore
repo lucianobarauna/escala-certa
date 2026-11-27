@@ -32,3 +32,7 @@ blob-report
 # Impeccable skill (instalada localmente)
 .claude/skills/impeccable/
 .claude/agents/impeccable-*.md
+
+# Vitest browser failure artifacts
+.vitest-attachments/
+__screenshots__/
