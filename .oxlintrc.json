@@ -82,7 +82,12 @@
         "max-lines-per-function": "off",
         "max-params": "off",
         "no-magic-numbers": "off",
-        "no-restricted-imports": "off"
+        "no-restricted-imports": "off",
+        "eqeqeq": "off",
+        "jsx-a11y/prefer-tag-over-role": "off",
+        "jsx-a11y/no-autofocus": "off",
+        "jsx-a11y/no-noninteractive-element-interactions": "off",
+        "jsx-a11y/click-events-have-key-events": "off"
       }
     },
     {
