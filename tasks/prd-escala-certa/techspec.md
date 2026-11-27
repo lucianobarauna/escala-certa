@@ -484,7 +484,7 @@ Renderizados com `vitest-browser-react` (Chromium real); só o que é externo é
 
 ### Testes E2E
 
-Playwright (`e2e/`, projeto Chromium, sobre o build de produção com React Compiler, `baseURL` `http://localhost:4173/escala-certa/`). Cada teste prepara os próprios dados via URL, intercepta `**/googletagmanager.com/**` e `**/google-analytics.com/**` com `page.route` (nunca chama o Google de verdade) e fixa o relógio com `page.clock`. Substitui o `home.spec.ts` do placeholder.
+Playwright (`e2e/`, projeto Chromium, sobre o build de produção com React Compiler, `baseURL` `http://localhost:4173/escala-certa/`). Cada teste prepara os próprios dados via URL, intercepta `googletagmanager.com` e `google-analytics.com` com `page.route` filtrando pelo hostname (o glob `**/googletagmanager.com/**` não casa com o subdomínio `www.` e deixaria a requisição passar), sem nunca chamar o Google de verdade; o build dos E2E usa um `VITE_GA_MEASUREMENT_ID` fictício e verifica `page_location`/`page_title` no `dataLayer`, já que o `gtag.js` real não é carregado e fixa o relógio com `page.clock`. Substitui o `home.spec.ts` do placeholder.
 
 1. `schedule-shift.spec.ts`: plantonista configura 12x36 noturno em < 1 min e vê hoje, legenda e resumo (US1–US3); a URL reflete a escala; recarregar a página restaura (US10).
 2. `schedule-weekly.spec.ts`: comerciário em rodízio de 4 semanas marca folgas conferindo o preview e informa a âncora; aviso de semana incompleta (US6, US7, US19).
