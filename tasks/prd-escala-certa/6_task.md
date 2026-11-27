@@ -26,13 +26,13 @@ Entrega os componentes de entrada da escala: escolha do tipo, campo de data digi
 
 ## Subtarefas
 
-- [ ] 6.1 Adicionar os primitivos shadcn (campos de texto/data, radio, seleção, toggle) via CLI, estilo `aria-nova`, sem editar os gerados.
-- [ ] 6.2 `ScheduleTypeSelector` + spec.
-- [ ] 6.3 `ReferenceDateField` + spec.
-- [ ] 6.4 `ShiftForm` + spec.
-- [ ] 6.5 `WeeklyForm` (+ `WeekRow.tsx`, `weekly-form.utils.ts`) + spec.
-- [ ] 6.6 `ScheduleNameField` + spec.
-- [ ] 6.7 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
+- [x] 6.1 Adicionar os primitivos shadcn (campos de texto/data, radio, seleção, toggle) via CLI, estilo `aria-nova`, sem editar os gerados.
+- [x] 6.2 `ScheduleTypeSelector` + spec.
+- [x] 6.3 `ReferenceDateField` + spec.
+- [x] 6.4 `ShiftForm` + spec.
+- [x] 6.5 `WeeklyForm` (+ `WeekRow.tsx`, `weekly-form.utils.ts`) + spec.
+- [x] 6.6 `ScheduleNameField` + spec.
+- [x] 6.7 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
 
 ## Detalhes de implementação
 
@@ -48,19 +48,19 @@ Ver `techspec.md`: tabela de componentes e tela, "Grade própria + `DateField`/`
 
 ### Testes unitários
 
-- [ ] `weekly-form.utils.spec.ts`: funções puras locais (rótulos de semana, motivo do limite, texto de semana incompleta), um conceito por teste.
+- [x] `weekly-form.utils.spec.ts`: funções puras locais (rótulos de semana, motivo do limite, texto de semana incompleta), um conceito por teste.
 
 ### Testes de integração
 
-- [ ] 1. `ScheduleTypeSelector`: duas opções, uma selecionada por vez; descrição faz parte do nome acessível (RF01); trocar tipo exibe só os campos do tipo (RF02); navegação por setas.
-- [ ] 2. `ReferenceDateField`: digitar `26/11/2026` seleciona; incompleta/inválida mostra erro em texto com `role="alert"` associado ao campo sem apagar o digitado (RF05); popup abre/fecha com Esc e devolve o foco ao campo; locale pt-BR.
-- [ ] 3. `ShiftForm`: turno só aparece em 12x36 e é obrigatório; trocar para 24x48 esconde o turno; preenche o rascunho.
-- [ ] 4. `WeeklyForm`: modalidade; quantidade 1–7 (padrão 1); marcar folgas; limite atingido desabilita os demais com motivo em texto; semana incompleta indicada por texto/ícone e anunciada (RF15); aviso ao trocar a modalidade (RF20); reduzir/aumentar semanas.
-- [ ] 5. `ScheduleNameField`: limite de 40; aviso de privacidade visível e associado (`aria-describedby`).
+- [x] 1. `ScheduleTypeSelector`: duas opções, uma selecionada por vez; descrição faz parte do nome acessível (RF01); trocar tipo exibe só os campos do tipo (RF02); navegação por setas.
+- [x] 2. `ReferenceDateField`: digitar `26/11/2026` seleciona; incompleta/inválida mostra erro em texto com `role="alert"` associado ao campo sem apagar o digitado (RF05); popup abre/fecha com Esc e devolve o foco ao campo; locale pt-BR.
+- [x] 3. `ShiftForm`: turno só aparece em 12x36 e é obrigatório; trocar para 24x48 esconde o turno; preenche o rascunho.
+- [x] 4. `WeeklyForm`: modalidade; quantidade 1–7 (padrão 1); marcar folgas; limite atingido desabilita os demais com motivo em texto; semana incompleta indicada por texto/ícone e anunciada (RF15); aviso ao trocar a modalidade (RF20); reduzir/aumentar semanas.
+- [x] 5. `ScheduleNameField`: limite de 40; aviso de privacidade visível e associado (`aria-describedby`).
 
 ### Testes E2E (se aplicável)
 
-- [ ] Não se aplica (cobertos na tarefa 10.0, `schedule-shift.spec.ts` e `schedule-weekly.spec.ts`).
+- [x] Não se aplica (cobertos na tarefa 10.0, `schedule-shift.spec.ts` e `schedule-weekly.spec.ts`).
 
 ## Arquivos relevantes
 
