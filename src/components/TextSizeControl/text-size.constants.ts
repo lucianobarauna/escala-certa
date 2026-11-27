@@ -19,3 +19,8 @@ export const DEFAULT_TEXT_SIZE = LEVEL_100;
 export const MIN_TEXT_SIZE_REASON = 'O texto já está no tamanho padrão (100%).';
 
 export const MAX_TEXT_SIZE_REASON = 'O texto já está no tamanho máximo (200%).';
+
+export const TEXT_SIZE_GROUP_LABEL = 'Tamanho do texto';
+export const DECREASE_LABEL = 'Diminuir texto';
+export const RESET_LABEL = 'Tamanho padrão';
+export const INCREASE_LABEL = 'Aumentar texto';
