@@ -25,12 +25,12 @@ Entrega os componentes de apoio da tela: botão de compartilhar, controle de tam
 
 ## Subtarefas
 
-- [ ] 8.1 `ConfigNotice` + spec.
-- [ ] 8.2 `TextSizeControl` (usa `useTextSize`) + spec.
-- [ ] 8.3 `ShareButton` (usa `shareLink` e `track`) + spec.
-- [ ] 8.4 `PrivacyDialog` (usa `useMetricsConsent`) + spec.
-- [ ] 8.5 `ConsentBanner` + spec.
-- [ ] 8.6 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
+- [x] 8.1 `ConfigNotice` + spec.
+- [x] 8.2 `TextSizeControl` (usa `useTextSize`) + spec.
+- [x] 8.3 `ShareButton` (usa `shareLink` e `track`) + spec.
+- [x] 8.4 `PrivacyDialog` (usa `useMetricsConsent`) + spec.
+- [x] 8.5 `ConsentBanner` + spec.
+- [x] 8.6 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
 
 ## Detalhes de implementação
 
@@ -45,19 +45,19 @@ Ver `techspec.md`: tabela de componentes, "Anúncios", "Pontos de integração" 
 
 ### Testes unitários
 
-- [ ] Funções puras locais (ex.: texto do compartilhamento com/sem nome) com spec ao lado.
+- [x] Funções puras locais (ex.: texto do compartilhamento com/sem nome) com spec ao lado.
 
 ### Testes de integração
 
-- [ ] 9. `ShareButton`: desabilitado com escala incompleta (RF46); com `navigator.share` chama o menu; sem ele copia e mostra "Link copiado" em `role="status"`; falha ao copiar mostra campo selecionável com o link; cancelamento não mostra nada nem rastreia.
-- [ ] 10. `TextSizeControl`: rótulos acessíveis, nível exibido e anunciado, limites com motivo.
-- [ ] 11. `ConsentBanner`: aparece sem escolha; botões "Aceitar métricas"/"Recusar métricas" com mesmo peso; some após escolher; não aparece com escolha guardada nem com GPC; não prende o foco; escolher devolve o foco a ponto lógico (RF64–RF65).
-- [ ] 12. `PrivacyDialog`: abre sem perder a escala, fecha com Esc devolvendo foco ao link; alternância das métricas com estado visível e anunciado; texto cita Google, cookies, o que nunca é coletado e que a escala fica só no link (RF62).
-- [ ] 13. `ConfigNotice`: mostra a mensagem por `issues`, com `role="alert"`; some quando não há problemas.
+- [x] 9. `ShareButton`: desabilitado com escala incompleta (RF46); com `navigator.share` chama o menu; sem ele copia e mostra "Link copiado" em `role="status"`; falha ao copiar mostra campo selecionável com o link; cancelamento não mostra nada nem rastreia.
+- [x] 10. `TextSizeControl`: rótulos acessíveis, nível exibido e anunciado, limites com motivo.
+- [x] 11. `ConsentBanner`: aparece sem escolha; botões "Aceitar métricas"/"Recusar métricas" com mesmo peso; some após escolher; não aparece com escolha guardada nem com GPC; não prende o foco; escolher devolve o foco a ponto lógico (RF64–RF65).
+- [x] 12. `PrivacyDialog`: abre sem perder a escala, fecha com Esc devolvendo foco ao link; alternância das métricas com estado visível e anunciado; texto cita Google, cookies, o que nunca é coletado e que a escala fica só no link (RF62).
+- [x] 13. `ConfigNotice`: mostra a mensagem por `issues`, com `role="alert"`; some quando não há problemas.
 
 ### Testes E2E (se aplicável)
 
-- [ ] Não se aplica (cobertos na tarefa 10.0: `schedule-share`, `text-size`, `consent-analytics`, `privacy`).
+- [x] Não se aplica (cobertos na tarefa 10.0: `schedule-share`, `text-size`, `consent-analytics`, `privacy`).
 
 ## Arquivos relevantes
 
