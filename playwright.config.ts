@@ -3,6 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 const PORT = 4173;
 const BASE_URL = `http://localhost:${PORT}/escala-certa/`;
 const CI_RETRIES = 2;
+const E2E_MEASUREMENT_ID = 'G-E2ETEST000';
 
 export default defineConfig({
   testDir: './e2e',
@@ -19,5 +20,6 @@ export default defineConfig({
     command: `pnpm build && pnpm preview --port ${PORT} --strictPort`,
     url: BASE_URL,
     reuseExistingServer: !process.env.CI,
+    env: { VITE_GA_MEASUREMENT_ID: E2E_MEASUREMENT_ID },
   },
 });
