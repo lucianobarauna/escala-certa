@@ -12,6 +12,7 @@ export default mergeConfig(
       exclude: [...configDefaults.exclude, 'e2e/**'],
       browser: {
         enabled: true,
+        headless: true,
         provider: playwright(),
         instances: [{ browser: 'chromium' }],
       },
