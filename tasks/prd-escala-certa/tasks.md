@@ -10,7 +10,7 @@ Ordem de construção de baixo para cima na pirâmide de testes (domínio → se
 - [x] 4.0 Infra e serviços (storage, compartilhamento, analytics, consentimento)
 - [x] 5.0 Hooks de estado
 - [x] 6.0 Formulários de entrada
-- [ ] 7.0 Preview do mês
+- [x] 7.0 Preview do mês
 - [ ] 8.0 Compartilhar, tamanho de texto, aviso, privacidade e consentimento
 - [ ] 9.0 HomeView e App
 - [ ] 10.0 E2E, acessibilidade e desempenho

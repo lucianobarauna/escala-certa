@@ -27,11 +27,11 @@ Entrega o calendário de consulta: cabeçalho com navegação, grade de 7 coluna
 
 ## Subtarefas
 
-- [ ] 7.1 `DayCell` e `MonthHeader` + specs.
-- [ ] 7.2 `Legend` e `MonthSummary` + specs.
-- [ ] 7.3 `MonthPreview` com grade/lista por container query e deslocamento do 1º dia (`col-start-N` só na variante de container).
-- [ ] 7.4 Calibrar o ponto de corte com verificação visual em 320–1280 px e texto 100–200%.
-- [ ] 7.5 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
+- [x] 7.1 `DayCell` e `MonthHeader` + specs.
+- [x] 7.2 `Legend` e `MonthSummary` + specs.
+- [x] 7.3 `MonthPreview` com grade/lista por container query e deslocamento do 1º dia (`col-start-N` só na variante de container).
+- [x] 7.4 Calibrar o ponto de corte com verificação visual em 320–1280 px e texto 100–200%. Calibrado em `40rem` (`--container-month-grid` em `src/index.css`): com `35rem` as células ficavam com 71 px e "Trabalha" vazava; com `40rem` a menor célula da grade tem ~86 px e não há rolagem horizontal em nenhuma combinação.
+- [x] 7.5 Rodar `pnpm lint`, `pnpm build` e `pnpm test:coverage`.
 
 ## Detalhes de implementação
 
@@ -47,17 +47,17 @@ Ver `techspec.md`: "Layout grade/lista", "Nome acessível do dia", "Anúncios", 
 
 ### Testes unitários
 
-- [ ] Funções puras locais (se criadas, ex.: mapeamento estado → rótulo/ícone) com spec ao lado, um conceito por teste.
+- [x] Funções puras locais (se criadas, ex.: mapeamento estado → rótulo/ícone) com spec ao lado, um conceito por teste.
 
 ### Testes de integração
 
-- [ ] 6. `MonthPreview`: cabeçalho com mês/ano pt-BR; botões "Mês anterior"/"Próximo mês"; "Voltar ao mês atual" só fora do mês atual (RF29); hoje destacado com marcador não só de cor; cada estado com ícone/texto; legenda lista só os estados existentes e explica a saída do plantão (RF26); `DayCell` com nome acessível completo; tocar em um dia não altera a escala (RF31); sem escala completa mostra orientação (RF03).
-- [ ] 7. `MonthSummary`: frase correta, `role="status"`, anunciada ao mudar de mês ou escala; substituída pela orientação quando incompleta.
-- [ ] 8. Layout: container estreito ou fonte ampliada → lista; largo → grade de 7 colunas; mesmos nomes, ícones e legenda nas duas formas (RF52–RF53).
+- [x] 6. `MonthPreview`: cabeçalho com mês/ano pt-BR; botões "Mês anterior"/"Próximo mês"; "Voltar ao mês atual" só fora do mês atual (RF29); hoje destacado com marcador não só de cor; cada estado com ícone/texto; legenda lista só os estados existentes e explica a saída do plantão (RF26); `DayCell` com nome acessível completo; tocar em um dia não altera a escala (RF31); sem escala completa mostra orientação (RF03).
+- [x] 7. `MonthSummary`: frase correta, `role="status"`, anunciada ao mudar de mês ou escala; substituída pela orientação quando incompleta.
+- [x] 8. Layout: container estreito ou fonte ampliada → lista; largo → grade de 7 colunas; mesmos nomes, ícones e legenda nas duas formas (RF52–RF53).
 
 ### Testes E2E (se aplicável)
 
-- [ ] Não se aplica (cobertos na tarefa 10.0, `month-navigation.spec.ts`, `text-size.spec.ts` e `accessibility.spec.ts`).
+- [x] Não se aplica (cobertos na tarefa 10.0, `month-navigation.spec.ts`, `text-size.spec.ts` e `accessibility.spec.ts`).
 
 ## Arquivos relevantes
 
